@@ -19,3 +19,12 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore OSX DS_Store
+.DS_Store
+
+# Ignore RubyMine IDE Files
+.idea
+
+# Ignore production credentials
+.env.production
