@@ -1,8 +1,8 @@
 ### Starting off
 
 - Make sure you have a functioning rails development environment
-- FlashTxts uses Rails 5, read up on the differences between Rails 4 and Rails 5 [here](http://nithinbekal.com/posts/rails-5-features/). It's not too different.
-- Clone the repo using `git clone git@github.com:purelogiq/flashtxts.git`
+- LetsThryve uses Rails 5, read up on the differences between Rails 4 and Rails 5 [here](http://nithinbekal.com/posts/rails-5-features/). It's not too different.
+- Clone the repo using `git clone git@github.com:purelogiq/letsthryve.git`
 - Monitor the Slack channel.
 
 ### How to make regular changes
@@ -30,7 +30,7 @@ Now when you are working on your code and you want to deploy it to test it out d
 4. Tell everyone else in the Slack channel that you are about to do a deploy and how long you will need the server for to test your changes.
 5. Make sure you are in the rails app directory then run `cap production deploy`
 6. Read the questions that follow and answer yes or no appropriately
-7. Let the script finish then go to flashtxts.com to checkout your changes (or text the number to checkout the updated code).
+7. Let the script finish then go to letsthryve.com to checkout your changes (or text the number to checkout the updated code).
 
 **IF YOU BREAK THE PRODUCTION SERVER** - it's ok. Just `git checkout master` then deploy it following the same steps above. Remember the master branch is (almost) guareenteed to work. If things still aren't working like before tell the team in the Slack channel. 
 
