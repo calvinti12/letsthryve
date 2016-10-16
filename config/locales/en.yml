@@ -20,4 +20,5 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  free_the_uc_stones: |
+    Help free %{random_name}! Free the UC Stones :)
