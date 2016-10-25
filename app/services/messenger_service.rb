@@ -7,7 +7,7 @@ class MessengerService
   end
 
   def route_incoming
-    send_message(:free_the_uc_stones, {random_name: RANDOM_NAME.sample})
+    send_generic_template(:free_the_uc_stones, {random_name: RANDOM_NAME.sample})
   end
 
   private
@@ -23,12 +23,11 @@ class MessengerService
                               buttons: [{type: "element_share"}]
                             }]
                   }
-
     }.to_json
     RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['PAGE_ACCESS_TOKEN']}",
                     data, content_type: :json
   end
-  
+
   def send_message(message, data_hash={})
     data = {
         recipient: {id: @sender_id},
