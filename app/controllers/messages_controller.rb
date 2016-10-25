@@ -15,7 +15,14 @@ class MessagesController < ApplicationController
         if entry['messaging'][0]['message'] # TODO account for multiple messages
           sender_id = entry['messaging'][0]['sender']['id']
           text = entry['messaging'][0]['message']['text']
+
           messenger_service = MessengerService.new(sender_id, text)
+          messenger_service.route_incoming
+        elsif entry['messaging'][0]['postback']
+          sender_id = entry['messaging'][0]['sender']['id']
+          payload = entry['messaging'][0]['postback']['payload']
+
+          messenger_service = MessengerService.new(sender_id, payload)
           messenger_service.route_incoming
         end
       end
