@@ -4,12 +4,6 @@ class MessengerService
   def initialize(sender_id, input)
     @sender_id = sender_id
     @input = input
-    RestClient.log =
-      Object.new.tap do |proxy|
-        def proxy.<<(message)
-          Rails.logger.info message
-        end
-      end
   end
 
   def route_incoming
@@ -31,8 +25,12 @@ class MessengerService
                               }
                   }
     }.to_json
-    RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['PAGE_ACCESS_TOKEN']}",
+    response = RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['PAGE_ACCESS_TOKEN']}",
                     data, content_type: :json
+  rescue
+    Rails.logger.error("==========================================")
+    Rails.logger.error(response)
+    Rails.logger.error(response.body)
   end
 
   def send_message(message, data_hash={})
