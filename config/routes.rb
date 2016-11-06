@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   root to: 'static#index'
   get 'messages/webhook', to: 'messages#webhook'
   post 'messages/webhook', to: 'messages#incoming'
+
+  get 'webview/sendm', to: 'webview#sendm'
+
 end
