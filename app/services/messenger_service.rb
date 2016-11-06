@@ -6,7 +6,8 @@ class MessengerService
     @input = input
   end
 
-  def route_incoming
+  def route_incoming(doit)
+    return unless doit
     send_generic_template(:free_the_uc_stones, {random_name: RANDOM_NAME.sample})
   end
 
@@ -20,7 +21,13 @@ class MessengerService
                                                       item_url: "https://google.com",
                                                       image_url: "http://stockfresh.com/files/l/lenm/m/83/1778303_stock-photo-family-exercise.jpg", 
                                                       subtitle: "A subtitle thing",
-                                                      buttons: [{type: "element_share"}]
+                                                      buttons: [{type: "element_share"},
+                                                      {
+                                                        "type":"postback",
+                                                        "title":"Start Chatting",
+                                                        "payload":"ISRAELS_SPECIFIC_PAYLOAD"
+                                                      }
+                                                      ]
                                                     }]
                                 }
                               }
