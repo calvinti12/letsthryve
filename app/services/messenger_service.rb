@@ -26,7 +26,12 @@ class MessengerService
                                                         "type":"postback",
                                                         "title":"Start Chatting",
                                                         "payload":"ISRAELS_SPECIFIC_PAYLOAD"
-                                                      }
+                                                      },{
+        "type":"web_url",
+        "url":"https://isitchristmas.com/",
+        "title":"Christmas",
+        "webview_height_ratio": "compact"
+      }
                                                       ]
                                                     }]
                                 }
