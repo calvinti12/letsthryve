@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
         if entry['messaging'][0]['message'] # TODO account for multiple messages
           sender_id = entry['messaging'][0]['sender']['id']
           text = entry['messaging'][0]['message']['text']
-          messenger_service = MessengerService.new(sender_id, text)
+          messenger_service = RouteMessageService.new(sender_id, text)
           messenger_service.route_incoming
         end
       end
