@@ -7,12 +7,15 @@ class MessengerService
   end
 
   def route_incoming(doit)
-    return unless doit
-    send_generic_template(:free_the_uc_stones, {random_name: RANDOM_NAME.sample})
+    if doit
+      send_generic_template
+    else
+      send_message(:free_the_uc_stones, {random_name: RANDOM_NAME.sample})
+    end
   end
 
   private
-  def send_generic_template(message, data_hash={})
+  def send_generic_template
     data = {
         recipient: {id: @sender_id},
         message: {attachment: { type: "template",

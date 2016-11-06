@@ -24,6 +24,12 @@ class MessagesController < ApplicationController
 
           messenger_service = MessengerService.new(sender_id, payload)
           messenger_service.route_incoming(false)
+        elsif entry['messaging'][0]['optin']
+          sender_id = entry['messaging'][0]['sender']['id']
+          payload = entry['messaging'][0]['optin']['ref']
+
+          messenger_service = MessengerService.new(sender_id, payload)
+          messenger_service.route_incoming(false)
         end
       end
     end
