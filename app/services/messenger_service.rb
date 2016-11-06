@@ -31,7 +31,7 @@ class MessengerService
                                                         "payload":"ISRAELS_SPECIFIC_PAYLOAD"
                                                       },{
         "type":"web_url",
-        "url":"https://isitchristmas.com/",
+        "url":"https://letsthryve.com/webview/sendm",
         "title":"Christmas",
         "webview_height_ratio": "compact"
       }
