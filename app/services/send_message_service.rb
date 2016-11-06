@@ -12,6 +12,30 @@ class SendMessageService
     send_it(data)
   end
 
+  def generic_template(elements_hash={})
+    data = {
+      recipient: {id: @sender_id},
+      message: {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: [
+              {
+                title: "Activities",
+                item_url: "https://google.com",
+                image_url: "http://stockfresh.com/files/l/lenm/m/83/1778303_stock-photo-family-exercise.jpg", 
+                subtitle: "A subtitle thing",
+                buttons: [{type: "element_share"}]
+              }
+            ]
+          }
+        }
+      }
+    }
+    send_it(data)
+  end
+
   private
 
   def send_it(data)
