@@ -28,3 +28,6 @@
 
 # Ignore production credentials
 .env.production
+
+# Ignore public assets
+/public/assets
