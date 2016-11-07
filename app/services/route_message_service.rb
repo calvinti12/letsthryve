@@ -21,7 +21,18 @@ class RouteMessageService
     sender.set_image 'fish.png'
     sender.deliver!
 
-    
+    sender.set_image 'https://yt3.ggpht.com/-v0soe-ievYE/AAAAAAAAAAI/AAAAAAAAAAA/OixOH_h84Po/s900-c-k-no-mo-rj-c0xffffff/photo.jpg'
+    sender.deliver!
+
+    sender.set_file 'sprintreport.pdf'
+    sender.deliver!
+
+    sender.set_audio 'http://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
+    sender.deliver!
+
+    sender.set_video 'http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4'
+    sender.deliver!
+
   end
 
 end
