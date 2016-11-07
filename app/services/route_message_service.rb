@@ -16,6 +16,12 @@ class RouteMessageService
     sender = MessageSender.new(@sender_id)
     sender.set_message :free_the_uc_stones, random_name: random_names.sample
     sender.deliver!
+
+    sender = MediaSender.new(@sender_id)
+    sender.set_image 'fish.png'
+    sender.deliver!
+
+    
   end
 
 end
