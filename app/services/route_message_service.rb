@@ -27,10 +27,10 @@ class RouteMessageService
     sender.set_file 'sprintreport.pdf'
     sender.deliver!
 
-    sender.set_audio 'http://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'
+    sender.set_audio 'sampleaudio.mp3'
     sender.deliver!
 
-    sender.set_video 'http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_1mb.mp4'
+    sender.set_video 'samplevid.mp4'
     sender.deliver!
 
   end
