@@ -13,12 +13,9 @@ class AbstractSender
   def deliver
     raise StandardError('Data not set for AbstractSender') unless @data
 
-    @data.merge(recipient: {id: @sender_id})
-    Rails.logger.error '========================='
-    Rails.logger.error @data.to_s
-    Rails.logger.error 'END-----------------------------------'
+    request = @data.merge(recipient: {id: @recipient}).to_json
     RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['PAGE_ACCESS_TOKEN']}",
-                    @data.to_json, content_type: :json
+                    request, content_type: :json
   end
 
 end
