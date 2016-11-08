@@ -3,7 +3,6 @@ class RouteMessageService
   def initialize(sender_id, input)
     @sender_id = sender_id
     @input = input
-    @send_service = SendMessageService.new(@sender_id)
   end
 
   def route_incoming
@@ -14,7 +13,9 @@ class RouteMessageService
 
   def catch_all
     random_names = ['Bob', 'Rock', 'Sally', 'Steve']
-    @send_service.message(:free_the_uc_stones, {random_name: random_names.sample})
+    sender = MessageSender.new(@sender_id)
+    sender.set_message :free_the_uc_stones, random_name: random_names.sample
+    sender.deliver!
   end
 
 end
