@@ -2,7 +2,7 @@ class CardSender < AbstractSender
 
   # How to use:
   # sender = CardSender.new(recipient)
-  # sender.add_element(title: 'Invite a friend!', image_url: 'http...')
+  # sender.add_element(title: 'Invite a friend!', image_url: 'http... or name of image in assets folder')
   #         .add_url_button(title: 'Invite!', url: 'http...', webview_size: 'tall')
   #         .add_share_button
   # sender.add_element(...)
@@ -20,7 +20,7 @@ class CardSender < AbstractSender
     element[:title] = title
     element[:subtitle] = subtitle if subtitle
     element[:item_url] = item_url if item_url
-    element[:image_url] = image_url if image_url
+    element[:image_url] = url_for_asset(image_url) if image_url
     @elements.append(element)
 
     def element.add_url_button(title: nil, url: nil, webview_size: nil,
