@@ -65,7 +65,6 @@ class CardSender < AbstractSender
 
   def deliver
     @data = {
-      recipient: {id: @sender_id},
       message: {
         attachment: {
           type: 'template',

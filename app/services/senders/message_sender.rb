@@ -1,18 +1,19 @@
 class MessageSender < AbstractSender
+
   # How to use:
-  # As a message:
+  # To send just a message:
   # sender = MessageSender.new(recipient)
   # sender.set_message('Hi mom')
   #       .deliver!
   #
-  # As a quick reply:
+  # To send a message with quick replies:
   # sender = MessageSender.new(recipient)
   # sender.set_message('Pick one')
   #       .add_reply(title: 'exercise', payload: 'one')
   #       .add_reply(title: 'study', payload: 'two')
   #       .add_reply(title: 'eat', payload: 'three')
   #       .deliver!
-  
+
   def initialize(recipient)
     super(recipient)
     @message = nil
@@ -25,7 +26,7 @@ class MessageSender < AbstractSender
   end
 
   def add_reply(title: nil, payload: nil, image_url: nil)
-  	raise StandardError('QuickReplySender reply element missing title or payload') unless title && payload
+    raise StandardError('MessageSender reply element missing title or payload') unless title && payload
   	reply = {
   	  content_type: 'text',
   	  title: title,
@@ -37,16 +38,15 @@ class MessageSender < AbstractSender
   end
 
   def deliver
-  	raise StandardError('QuickReplySender message not set') unless @message
-  	raise StandardError('QuickReplySender replies not set properly') unless @replies.size <= 10
+    raise StandardError('MessageSender message not set') unless @message
+    raise StandardError('MessageSender replies not set properly') unless @replies.size <= 10
 
-  	@data = {
-      recipient: {id: @sender_id},
+    @data = {
       message: {
-      	text: @message
+        text: @message
       }
     }
-    @data[:message][:quick_replies] = @replies if @replies.size > 0
+    @data[:message][:quick_replies] = @replies if @replies.any?
     super
   end
 end

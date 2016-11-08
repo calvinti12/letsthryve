@@ -56,7 +56,6 @@ class PromptSender < AbstractSender
     raise StandardError('PromptSender buttons not set properly') unless 0 < @buttons.size && @buttons.size <= 3
 
     @data = {
-      recipient: {id: @sender_id},
       message: {
         attachment: {
           type: 'template',
