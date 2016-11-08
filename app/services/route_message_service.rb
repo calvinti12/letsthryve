@@ -12,9 +12,11 @@ class RouteMessageService
   private
 
   def catch_all
-    random_names = ['Bob', 'Rock', 'Sally', 'Steve']
-    sender = MessageSender.new(@sender_id)
-    sender.set_message :free_the_uc_stones, random_name: random_names.sample
+    sender = CardSender.new(@sender_id)
+    sender.add_element(title: 'Test title', subtitle: 'test subtitle',
+                       item_url: 'https://google.com', image_url: 'fish.png')
+          .add_url_button(title: 'Google.com', url: 'https://google.com', webview_size: 'full')
+          .add_share_button
     sender.deliver!
   end
 
