@@ -13,9 +13,12 @@ class RouteMessageService
 
   def catch_all
     random_names = ['Bob', 'Rock', 'Sally', 'Steve']
-    sender = MessageSender.new(@sender_id)
-    sender.set_message :free_the_uc_stones, random_name: random_names.sample
-    sender.deliver!
+    sender = QuickReplySender.new(@sender_id)
+    sender.set_message('Pick one')
+          .add_reply(title: 'exercise', payload: 'one')
+          .add_reply(title: 'study', payload: 'two')
+          .add_reply(title: 'eat', payload: 'three')
+          .deliver!
   end
 
 end
