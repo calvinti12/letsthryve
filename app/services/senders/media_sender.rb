@@ -1,5 +1,12 @@
 class MediaSender < AbstractSender
 
+  # How to use (same for set_audio/video/file, etc)
+  # sender = MediaSender.new(recipient)
+  # sender.set_image('https://imageurl.com/image.png')
+  #        OR
+  # sender.set_image('israel.png')
+  # sender.deliver!
+
   def set_image(image)
     set_media('image', image)
   end
