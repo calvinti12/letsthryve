@@ -19,8 +19,8 @@ class CardSender < AbstractSender
     element = {}
     element[:title] = title
     element[:subtitle] = subtitle if subtitle
-    element[:item_url] = item_url if item_url
-    element[:image_url] = url_for_asset(image_url) if image_url
+    element[:item_url] = AbstractSender.url_for_page(item_url) if item_url
+    element[:image_url] = AbstractSender.url_for_asset(image_url) if image_url
     @elements.append(element)
 
     def element.add_url_button(title: nil, url: nil, webview_size: nil,
@@ -32,11 +32,11 @@ class CardSender < AbstractSender
       button = {
         type: 'web_url',
         title: title,
-        url: url
+        url: AbstractSender.url_for_page(url)
       }
       button[:webview_height_ratio] = webview_size if webview_size
       button[:messenger_extensions] = use_extensions if use_extensions
-      button[:fallback_url] = fallback_url if fallback_url
+      button[:fallback_url] = AbstractSender.url_for_page(fallback_url) if fallback_url
       self[:buttons].append(button)
       self
     end

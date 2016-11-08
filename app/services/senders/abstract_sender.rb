@@ -19,13 +19,24 @@ class AbstractSender
                     request, content_type: :json
   end
 
-  protected
-
-  def url_for_asset(media)
+  def self.url_for_asset(media)
     if media.strip =~ /\Ahttps?:\/\//
       media.strip
     else
       SITE_DOMAIN + ActionController::Base.helpers.asset_url(media.strip)
+    end
+  end
+
+  def self.url_for_page(page)
+    page = page.strip
+    if page =~ /\Ahttps?:\/\//
+      page
+    elsif page =~ /\Awww\./
+      'https://' + page
+    elsif page =~ /\A\//
+      SITE_DOMAIN + page
+    else
+      SITE_DOMAIN + '/' + page
     end
   end
 

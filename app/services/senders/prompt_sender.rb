@@ -25,11 +25,11 @@ class PromptSender < AbstractSender
     button = {
       type: 'web_url',
       title: title,
-      url: url
+      url: AbstractSender.url_for_page(url)
     }
     button[:webview_height_ratio] = webview_size if webview_size
     button[:messenger_extensions] = use_extensions if use_extensions
-    button[:fallback_url] = fallback_url if fallback_url
+    button[:fallback_url] = AbstractSender.url_for_page(fallback_url) if fallback_url
     @buttons.append(button)
     self
   end
