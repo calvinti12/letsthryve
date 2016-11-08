@@ -1,12 +1,12 @@
-class TemplateSender < AbstractSender
+class CardSender < AbstractSender
 
   # How to use:
-  # template = TemplateSender.new(recipient)
-  # template.add_element(title: 'Invite a friend!', image_url: 'http...')
+  # sender = CardSender.new(recipient)
+  # sender.add_element(title: 'Invite a friend!', image_url: 'http...')
   #         .add_url_button(title: 'Invite!', url: 'http...', webview_size: 'tall')
   #         .add_share_button
-  # template.add_element(...)
-  # template.deliver!
+  # sender.add_element(...)
+  # sender.deliver!
 
   def initialize(recipient)
     super(recipient)
@@ -14,7 +14,7 @@ class TemplateSender < AbstractSender
   end
 
   def add_element(title: nil, subtitle: nil, item_url: nil, image_url: nil)
-    raise StandardError('TemplateSender title not set') unless title
+    raise StandardError('CardSender title not set') unless title
 
     element = {}
     element[:title] = title
@@ -25,8 +25,8 @@ class TemplateSender < AbstractSender
 
     def element.add_url_button(title: nil, url: nil, webview_size: nil,
                                use_extensions: false, fallback_url: nil)
-      raise StandardError('TemplateSender url button for element missing title or url') unless title && url
-      raise StandardError("TemplateSender invalid value #{webview_size} for webview_size") unless [nil, 'compact', 'tall', 'full'].include?(webview_size)
+      raise StandardError('CardSender url button for element missing title or url') unless title && url
+      raise StandardError("CardSender invalid value #{webview_size} for webview_size") unless [nil, 'compact', 'tall', 'full'].include?(webview_size)
 
       self[:buttons] = [] unless self[:buttons]
       self[:buttons].append({
@@ -41,7 +41,7 @@ class TemplateSender < AbstractSender
     end
 
     def element.add_postback_button(title: nil, payload: nil)
-      raise StandardError('TemplateSender postback button for element missing title or payload') unless title && payload
+      raise StandardError('CardSender postback button for element missing title or payload') unless title && payload
       self[:buttons] = [] unless self[:buttons]
       self[:buttons].append({
         type: 'postback',
@@ -67,9 +67,9 @@ class TemplateSender < AbstractSender
       recipient: {id: @sender_id},
       message: {
         attachment: {
-          type: "template",
+          type: 'template',
           payload: {
-            template_type: "generic",
+            template_type: 'generic',
             elements: @elements
           }
         }
