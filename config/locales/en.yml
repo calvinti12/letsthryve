@@ -22,3 +22,5 @@
 en:
   free_the_uc_stones: |
     Help free %{random_name}! Free the UC Stones :)
+  welcome_message: |
+    Hello %{random_name}, how can I help you be well today?
