@@ -3,8 +3,8 @@ class CardSender < AbstractSender
   # How to use:
   # sender = CardSender.new(recipient)
   # sender.add_card(title: 'Invite a friend!', image_url: 'http... or name of image in assets folder')
-  #         .add_url_button(title: 'Invite!', url: 'http...', webview_size: 'tall')
-  #         .add_share_button
+  #       .add_url_button(title: 'Invite!', url: 'http...', webview_size: 'tall')
+  #       .add_share_button
   # sender.add_element(...)
   # sender.deliver!
 
@@ -65,7 +65,6 @@ class CardSender < AbstractSender
 
   def deliver
     @data = {
-      recipient: {id: @sender_id},
       message: {
         attachment: {
           type: 'template',
