@@ -29,14 +29,15 @@ class CardSender < AbstractSender
       raise StandardError("CardSender invalid value #{webview_size} for webview_size") unless [nil, 'compact', 'tall', 'full'].include?(webview_size)
 
       self[:buttons] = [] unless self[:buttons]
-      self[:buttons].append({
+      button = {
         type: 'web_url',
         title: title,
-        url: url,
-        webview_height_ratio: webview_size,
-        messenger_extensions: use_extensions,
-        fallback_url: fallback_url
-      })
+        url: url
+      }
+      button[:webview_height_ratio] = webview_size if webview_size
+      button[:messenger_extensions] = use_extensions if use_extensions
+      button[:fallback_url] = fallback_url if fallback_url
+      self[:buttons].append(button)
       self
     end
 

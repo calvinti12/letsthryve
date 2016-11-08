@@ -22,14 +22,15 @@ class PromptSender < AbstractSender
     raise StandardError('PromptSender url button for element missing title or url') unless title && url
     raise StandardError("PromptSender invalid value #{webview_size} for webview_size") unless [nil, 'compact', 'tall', 'full'].include?(webview_size)
 
-    @buttons.append({
+    button = {
       type: 'web_url',
       title: title,
-      url: url,
-      webview_height_ratio: webview_size,
-      messenger_extensions: use_extensions,
-      fallback_url: fallback_url
-    })
+      url: url
+    }
+    button[:webview_height_ratio] = webview_size if webview_size
+    button[:messenger_extensions] = use_extensions if use_extensions
+    button[:fallback_url] = fallback_url if fallback_url
+    @buttons.append(button)
     self
   end
 
