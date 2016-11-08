@@ -2,7 +2,7 @@ class CardSender < AbstractSender
 
   # How to use:
   # sender = CardSender.new(recipient)
-  # sender.add_element(title: 'Invite a friend!', image_url: 'http... or name of image in assets folder')
+  # sender.add_card(title: 'Invite a friend!', image_url: 'http... or name of image in assets folder')
   #         .add_url_button(title: 'Invite!', url: 'http...', webview_size: 'tall')
   #         .add_share_button
   # sender.add_element(...)
@@ -13,7 +13,7 @@ class CardSender < AbstractSender
     @elements = []
   end
 
-  def add_element(title: nil, subtitle: nil, item_url: nil, image_url: nil)
+  def add_card(title: nil, subtitle: nil, item_url: nil, image_url: nil)
     raise StandardError('CardSender title not set') unless title
 
     element = {}
