@@ -3,4 +3,8 @@ Rails.application.routes.draw do
   root to: 'static#index'
   get 'messages/webhook', to: 'messages#webhook'
   post 'messages/webhook', to: 'messages#incoming'
+
+  scope 'webview', as: 'webview' do
+    get 'login', to: 'webview#login'
+  end
 end
