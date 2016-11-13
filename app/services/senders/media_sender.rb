@@ -36,7 +36,10 @@ class MediaSender < AbstractSender
       message: {
         attachment: {
           type: type,
-          payload: {url: AbstractSender.url_for_asset(media)}
+          payload: {
+            url: AbstractSender.url_for_asset(media),
+            is_reusable: true
+          }
         }
       }
     }
