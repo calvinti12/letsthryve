@@ -6,6 +6,10 @@ class GetStartedReceiver < AbstractReceiver
           .add_reply(title: 'Play a game of Pong!',
                      payload: link_receiver(self, :ping, {count: 1}))
           .deliver!
+    sender = PromptSender.new(@user)
+    sender.set_message('click me lol')
+    sender.add_url_button(title: 'Quora', url: 'https://www.quora.com/', webview_size: 'tall')
+    sender.deliver!
   end
 
   def ping
