@@ -9,18 +9,22 @@ class MediaSender < AbstractSender
 
   def set_image(image)
     set_media('image', image)
+    self
   end
 
   def set_audio(audio)
     set_media('audio', audio)
+    self
   end
 
   def set_video(video)
     set_media('video', video)
+    self
   end
 
   def set_file(file)
     set_media('file', file)
+    self
   end
 
   private
