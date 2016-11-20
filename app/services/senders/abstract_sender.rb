@@ -40,4 +40,8 @@ class AbstractSender
     end
   end
 
+  def self.locale_message(message, data_hash={})
+    message.is_a?(Symbol) ? I18n.t(message, data_hash) : message
+  end
+
 end

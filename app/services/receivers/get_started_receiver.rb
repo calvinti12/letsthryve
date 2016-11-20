@@ -2,38 +2,13 @@ class GetStartedReceiver < AbstractReceiver
 
   def get_started
     sender = MessageSender.new(@user)
-    sender.set_message('Hi, how are you :)')
-          .add_reply(title: 'Play a game of Pong!',
-                     payload: link_receiver(self, :ping, {count: 1}))
-          .deliver!
-  end
-
-  def ping
-    count = @data[:count]
-    sender = MessageSender.new(@user)
-    sender.set_message("Ping! #{count}")
-          .add_reply(title: 'Pong back?',
-                     payload: link_receiver(self, :pong, {count: count + 1}))
-          .deliver!
-  end
-
-  def pong
-    count = @data[:count]
-    sender = MessageSender.new(@user)
-    sender.set_message("Pong! #{count}")
-          .add_reply(title: 'Ping back?',
-                     payload: link_receiver(self, :ping, {count: count + 1}))
-
-    if count >= 9
-      sender.add_reply(title: "Show funny image?",
-                       payload: link_receiver(self, :funny_image))
-    end
-    sender.deliver!
-  end
-
-  def funny_image
-    sender = MediaSender.new(@user)
-    sender.set_image('https://media.giphy.com/media/11LtzfNXmCQQ80/giphy.gif')
+    sender.set_message(:getting_started_greeting_1).deliver!
+    sender.set_message(:getting_started_greeting_2).deliver!
+    sender.set_message(:getting_started_greeting_3)
+          .add_reply(title: 'Let\'s Go!',
+                     payload: link_receiver(SettingsReceiver, :modify_settings))
+          .add_reply(title: 'Later',
+                     payload: link_receiver(SettingsReceiver, :modify_later))
           .deliver!
   end
 

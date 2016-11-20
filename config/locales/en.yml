@@ -22,3 +22,37 @@
 en:
   free_the_uc_stones: |
     Help free %{random_name}! Free the UC Stones :)
+
+  getting_started_greeting_1: |
+    Hi Steve, I can help you become a wellness master!
+
+  getting_started_greeting_2: |
+    Complete wellness challenges with your friends to earn badges!
+
+  getting_started_greeting_3: |
+    You can modify your settings to find friends with similar interests!
+    Would you like to change them now?
+
+  settings_modify_later: |
+    Ok, just look for settings in the menu if you ever want to change it.
+
+  activity_choose_an_activity_start: |
+    Alright. Whaddya want to do today?
+
+  friend_challenge_title:
+    Complete a challenge with a friend
+
+  friend_challenge_subtitle:
+    Earn badges for completing challenges with friends!
+
+  daily_mission_title:
+    Daily Missions
+
+  daily_mission_subtitle:
+    Your mission, if you choose to accept...
+
+  campus_events_title:
+    Campus Events
+
+  campus_events_subtitle:
+    Feeling stressed? Chill with your friend at one our campus events!
