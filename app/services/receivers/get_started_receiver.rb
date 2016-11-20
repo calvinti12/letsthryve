@@ -1,11 +1,12 @@
 class GetStartedReceiver < AbstractReceiver
 
   def get_started
-    sender = MessageSender.new(@user)
-    sender.set_message('Hi, how are you :)')
-          .add_reply(title: 'Play a game of Pong!',
-                     payload: link_receiver(self, :ping, {count: 1}))
-          .deliver!
+    sender = PromptSender.new(@user)
+    sender.set_message('Login with facebook!')
+    sender.add_url_button(title: 'Allow permissions',
+                          url: "https://www.facebook.com/v2.8/dialog/oauth?client_id=#{ENV['FACEBOOK_APP_ID']}&redirect_uri=https://letsthryve.com/webview/login?sender_id=#{@user}",
+                          webview_size: 'tall')
+    sender.deliver
   end
 
   def ping
