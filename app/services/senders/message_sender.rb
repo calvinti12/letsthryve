@@ -21,7 +21,7 @@ class MessageSender < AbstractSender
   end
 
   def set_message(message, data_hash={})
-    @message = message.is_a?(Symbol) ? I18n.t(message, data_hash) : message
+    @message = AbstractSender.locale_message(message, data_hash)
     self
   end
 

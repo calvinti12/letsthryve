@@ -15,7 +15,7 @@ class AbstractSender
     raise StandardError('Data not set for AbstractSender') unless @data
 
     request = @data.merge(recipient: {id: @recipient}).to_json
-    RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['PAGE_ACCESS_TOKEN']}",
+    RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['FB_PAGE_ACCESS_TOKEN']}",
                     request, content_type: :json
   end
 
@@ -38,6 +38,10 @@ class AbstractSender
     else
       SITE_DOMAIN + '/' + page
     end
+  end
+
+  def self.locale_message(message, data_hash={})
+    message.is_a?(Symbol) ? I18n.t(message, data_hash) : message
   end
 
 end

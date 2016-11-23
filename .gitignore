@@ -27,6 +27,7 @@
 .idea
 
 # Ignore production credentials
+.env.development
 .env.production
 
 # Ignore public assets

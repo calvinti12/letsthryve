@@ -3,9 +3,9 @@ class PromptSender < AbstractSender
   # How to use:
   # sender = PromptSender.new(recipient)
   # sender.set_message('Hi mom')
-  # sender.add_url_button(title: 'Click me', url: 'https://google.com', ...)
-  # sender.add_share_button
-  # sender.deliver!
+  #       .add_url_button(title: 'Click me', url: 'https://google.com', ...)
+  #       .add_share_button
+  #       .deliver!
 
   def initialize(recipient)
     super(recipient)
@@ -14,7 +14,8 @@ class PromptSender < AbstractSender
   end
 
   def set_message(message, data_hash={})
-    @message = message.is_a?(Symbol) ? I18n.t(message, data_hash) : message
+    @message = AbstractSender.locale_message(message, data_hash)
+    self
   end
 
   def add_url_button(title: nil, url: nil, webview_size: nil,
@@ -24,7 +25,7 @@ class PromptSender < AbstractSender
 
     button = {
       type: 'web_url',
-      title: title,
+      title: AbstractSender.locale_message(title),
       url: AbstractSender.url_for_page(url)
     }
     button[:webview_height_ratio] = webview_size if webview_size
@@ -38,7 +39,7 @@ class PromptSender < AbstractSender
     raise StandardError('PromptSender postback button missing title or payload') unless title && payload
     @buttons.append({
       type: 'postback',
-      title: title,
+      title: AbstractSender.locale_message(title),
       payload: payload
     })
     self

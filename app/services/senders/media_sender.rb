@@ -5,7 +5,7 @@ class MediaSender < AbstractSender
   # sender.set_image('https://imageurl.com/image.png')
   #        OR
   # sender.set_image('israel.png')
-  # sender.deliver!
+  #       .deliver!
 
   def set_image(image)
     set_media('image', image)
@@ -29,14 +29,17 @@ class MediaSender < AbstractSender
 
   private
 
-  def set_media(type, media)
+  def set_media(type, media, is_reusable=true)
     raise StandardError('Media not set for MediaSender') unless media
 
     @data = {
       message: {
         attachment: {
           type: type,
-          payload: {url: AbstractSender.url_for_asset(media)}
+          payload: {
+            url: AbstractSender.url_for_asset(media),
+            is_reusable: is_reusable
+          }
         }
       }
     }
