@@ -1,14 +1,14 @@
 class PromptSender < AbstractSender
 
   # How to use:
-  # sender = PromptSender.new(recipient)
+  # sender = PromptSender.new(user)
   # sender.set_message('Hi mom')
   #       .add_url_button(title: 'Click me', url: 'https://google.com', ...)
   #       .add_share_button
   #       .deliver!
 
-  def initialize(recipient)
-    super(recipient)
+  def initialize(user)
+    super(user)
     @message = nil
     @buttons = []
   end

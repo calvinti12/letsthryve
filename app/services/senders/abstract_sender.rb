@@ -1,9 +1,9 @@
 class AbstractSender
   SITE_DOMAIN = 'https://letsthryve.com'
 
-  def initialize(recipient)
-    raise StandardError('Recipient not set for AbstractSender') unless recipient
-    @recipient = recipient
+  def initialize(user)
+    raise StandardError('Recipient not set for AbstractSender') unless user
+    @user = user
     @data = nil
   end
 
@@ -14,9 +14,15 @@ class AbstractSender
   def deliver
     raise StandardError('Data not set for AbstractSender') unless @data
 
-    request = @data.merge(recipient: {id: @recipient}).to_json
-    RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['FB_PAGE_ACCESS_TOKEN']}",
-                    request, content_type: :json
+    # Gives the illusion of the bot processing the user's message.
+    typing_hint_request = {recipient: {id: @user.fb_messenger_id}, sender_action: 'typing_on'}.to_json
+    make_request(typing_hint_request)
+    sleep 0.1
+
+    # Sends the actual message
+    message_request = @data.merge(recipient: {id: @user.fb_messenger_id}).to_json
+    @user.update_attributes(last_message_sent: message_request)
+    make_request(message_request)
   end
 
   def self.url_for_asset(media)
@@ -42,6 +48,17 @@ class AbstractSender
 
   def self.locale_message(message, data_hash={})
     message.is_a?(Symbol) ? I18n.t(message, data_hash) : message
+  end
+
+  def self.repeat_last_message(user)
+    make_request(user.last_message_sent)
+  end
+
+  private
+
+  def make_request(request)
+    RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['FB_PAGE_ACCESS_TOKEN']}",
+                    request, content_type: :json
   end
 
 end

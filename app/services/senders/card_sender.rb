@@ -1,15 +1,15 @@
 class CardSender < AbstractSender
 
   # How to use:
-  # sender = CardSender.new(recipient)
+  # sender = CardSender.new(user)
   # sender.add_card(title: 'Invite a friend!', image_url: 'http... or name of image in assets folder')
   #       .add_url_button(title: 'Invite!', url: 'http...', webview_size: 'tall')
   #       .add_share_button
   # sender.add_card(...)
   # sender.deliver!
 
-  def initialize(recipient)
-    super(recipient)
+  def initialize(user)
+    super(user)
     @elements = []
   end
 
