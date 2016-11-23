@@ -5,7 +5,7 @@ class CardSender < AbstractSender
   # sender.add_card(title: 'Invite a friend!', image_url: 'http... or name of image in assets folder')
   #       .add_url_button(title: 'Invite!', url: 'http...', webview_size: 'tall')
   #       .add_share_button
-  # sender.add_element(...)
+  # sender.add_card(...)
   # sender.deliver!
 
   def initialize(recipient)
@@ -17,8 +17,8 @@ class CardSender < AbstractSender
     raise StandardError('CardSender title not set') unless title
 
     element = {}
-    element[:title] = title
-    element[:subtitle] = subtitle if subtitle
+    element[:title] = AbstractSender.locale_message(title)
+    element[:subtitle] = AbstractSender.locale_message(subtitle) if subtitle
     element[:item_url] = AbstractSender.url_for_page(item_url) if item_url
     element[:image_url] = AbstractSender.url_for_asset(image_url) if image_url
     @elements.append(element)
@@ -31,7 +31,7 @@ class CardSender < AbstractSender
       self[:buttons] = [] unless self[:buttons]
       button = {
         type: 'web_url',
-        title: title,
+        title: AbstractSender.locale_message(title),
         url: AbstractSender.url_for_page(url)
       }
       button[:webview_height_ratio] = webview_size if webview_size
@@ -46,7 +46,7 @@ class CardSender < AbstractSender
       self[:buttons] = [] unless self[:buttons]
       self[:buttons].append({
         type: 'postback',
-        title: title,
+        title: AbstractSender.locale_message(title),
         payload: payload
       })
       self
