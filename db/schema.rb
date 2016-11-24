@@ -10,17 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123184144) do
+ActiveRecord::Schema.define(version: 20161125202344) do
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id", "friend_id"], name: "index_friendships_on_user_id_and_friend_id", unique: true
+    t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "fb_messenger_id"
     t.string   "fb_profile_id"
+    t.string   "first_name"
+    t.string   "full_name"
+    t.string   "picture_url"
     t.boolean  "ignore",            default: false
     t.string   "last_message_sent"
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
-    t.index ["fb_messenger_id"], name: "fb_messenger_id_idx"
-    t.index ["fb_profile_id"], name: "fb_profile_id_idx"
+    t.index ["fb_messenger_id"], name: "index_users_on_fb_messenger_id"
+    t.index ["fb_profile_id"], name: "index_users_on_fb_profile_id"
   end
 
 end

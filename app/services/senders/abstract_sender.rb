@@ -17,7 +17,7 @@ class AbstractSender
     # Gives the illusion of the bot processing the user's message.
     typing_hint_request = {recipient: {id: @user.fb_messenger_id}, sender_action: 'typing_on'}.to_json
     make_request(typing_hint_request)
-    sleep 0.1
+    sleep 0.25
 
     # Sends the actual message
     message_request = @data.merge(recipient: {id: @user.fb_messenger_id}).to_json
@@ -51,7 +51,8 @@ class AbstractSender
   end
 
   def self.repeat_last_message(user)
-    make_request(user.last_message_sent)
+    RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['FB_PAGE_ACCESS_TOKEN']}",
+                    user.last_message_sent, content_type: :json
   end
 
   private

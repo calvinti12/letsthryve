@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  
+  has_many :friendships
+  has_many :friends, through: :friendships, source: :friend
 end
 
 # == Schema Information
@@ -9,6 +10,9 @@ end
 #  id                :integer          not null, primary key
 #  fb_messenger_id   :string
 #  fb_profile_id     :string
+#  first_name        :string
+#  full_name         :string
+#  picture_url       :string
 #  ignore            :boolean          default(FALSE)
 #  last_message_sent :string
 #  created_at        :datetime         not null
@@ -16,6 +20,6 @@ end
 #
 # Indexes
 #
-#  fb_messenger_id_idx  (fb_messenger_id)
-#  fb_profile_id_idx    (fb_profile_id)
+#  index_users_on_fb_messenger_id  (fb_messenger_id)
+#  index_users_on_fb_profile_id    (fb_profile_id)
 #
