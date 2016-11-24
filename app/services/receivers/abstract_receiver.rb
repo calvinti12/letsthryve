@@ -1,6 +1,6 @@
 class AbstractReceiver
 
-  def initialize(user, data)
+  def initialize(user, data={})
     @user = user
     @data = data
   end

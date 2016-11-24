@@ -2,20 +2,20 @@ class MessageSender < AbstractSender
 
   # How to use:
   # To send just a message:
-  # sender = MessageSender.new(recipient)
+  # sender = MessageSender.new(user)
   # sender.set_message('Hi mom')
   #       .deliver!
   #
   # To send a message with quick replies:
-  # sender = MessageSender.new(recipient)
+  # sender = MessageSender.new(user)
   # sender.set_message('Pick one')
   #       .add_reply(title: 'exercise', payload: 'one')
   #       .add_reply(title: 'study', payload: 'two')
   #       .add_reply(title: 'eat', payload: 'three')
   #       .deliver!
 
-  def initialize(recipient)
-    super(recipient)
+  def initialize(user)
+    super(user)
     @message = nil
     @replies = []
   end
