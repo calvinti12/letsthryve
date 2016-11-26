@@ -22,3 +22,13 @@
 en:
   free_the_uc_stones: |
     Help free %{random_name}! Free the UC Stones :)
+
+  introduction_part_1: |
+    Hi, I'm ThryveBot! I can help you see which of your
+    friends want to hang out and when they're free!
+
+  introduction_part_2: |
+    First, I need permission to see your friends, is that ok?
+
+  fb_setup_complete: |
+    Hi %{name}! Looks like you have %{friends_count} friends using Let's Thryve!
