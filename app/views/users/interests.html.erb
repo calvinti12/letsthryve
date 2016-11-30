@@ -1,0 +1,78 @@
+<style type="text/css">
+  #webview-content .activity {
+    margin-bottom: .25rem;
+  }
+
+  #webview-content .labelText {
+    width: 6.5rem;
+    font-size: .9rem;
+  }
+</style>
+
+<div id="webview-content">
+  <div class="infoContainer">
+    <img src="http://www.clipartkid.com/images/197/work-clipart-image-cartoon-elephant-worker-going-off-to-the-job-cq4k6z-clipart.jpg" class="infoImage" />
+    <p style="font-size: 1.1rem">What are your favorite things to do together?</p>
+  </div>
+
+  <div class="mainContainer">
+    <div class="ui pointing menu">
+      <a class="item">Newsfeed</a>
+      <a class="item">Myself</a>
+      <a class="item active">Friends</a>
+      <a class="item">Invite</a>
+    </div>
+    <div class="ui labeled input activity">
+      <div class="ui label labelText">
+        Exercise
+      </div>
+      <select multiple class="ui dropdown flushBorder">
+        <option value=''>Select all that apply</option>
+        <% FormFieldData::EXERCISE.each do |activity| %>
+          <option value="<%= activity %>"><%= activity %></option>
+        <% end %>
+      </select>
+    </div>
+    <br />
+
+    <div class="ui labeled input activity">
+      <div class="ui label labelText">
+        Hang Out
+      </div>
+      <select multiple class="ui dropdown flushBorder">
+        <option value=''>Select all that apply</option>
+        <% FormFieldData::HANGOUT.each do |activity| %>
+          <option value="<%= activity %>"><%= activity %></option>
+        <% end %>
+      </select>
+    </div>
+    <br />
+
+    <div class="ui labeled input activity">
+      <div class="ui label labelText">
+        On Campus
+      </div>
+      <select multiple class="ui dropdown flushBorder">
+        <option value=''>Select all that apply</option>
+        <% FormFieldData::ONCAMPUS.each do |activity| %>
+          <option value="<%= activity %>"><%= activity %></option>
+        <% end %>
+      </select>
+    </div>
+    <br />
+  </div>
+
+  <div class="submitButton">
+    <p style="color: grey">
+      <i class="grey info circle icon"></i>
+      Your friends can invite you to any activity, but, this lets them
+      know what you <strong>really</strong> love to do!
+    </p>
+    <button class="positive ui button" style="width: 100%">Done</button>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('select.dropdown').dropdown();
+  $('.selection.dropdown').attr('style', 'width: 16rem');
+</script>

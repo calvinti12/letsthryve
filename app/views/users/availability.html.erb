@@ -1,0 +1,59 @@
+<style type="text/css">
+  #webview-content .slot {
+    margin-bottom: .5rem;
+  }
+
+  #webview-content .at {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-top: 20px;
+  }
+
+  #webview-content .smallSidePadding {
+    padding: 7px 4px 7px 4px;
+  }
+</style>
+
+<div id="webview-content">
+  <div class="infoContainer">
+    <img src="http://www.clipartkid.com/images/197/work-clipart-image-cartoon-elephant-worker-going-off-to-the-job-cq4k6z-clipart.jpg" class="infoImage" />
+    <p style="font-size: 1.1rem">When are the top 5 times that you're free?</p>
+  </div>
+
+  <div class="mainContainer">
+    <div class="ui grid">
+      <% 5.times do %>
+        <div class="eight wide column smallSidePadding">
+          <select class="ui dropdown daySelect">
+            <option value=''>Select a day</option>
+            <% FormFieldData::FREE_DAYS.each do |day| %>
+              <option value='<%= day %>'><%= day %></option>
+            <% end %>
+          </select>
+        </div>
+        <div class="eight wide column smallSidePadding">
+          <select class="ui dropdown">
+            <option value=''>Select a time</option>
+            <% FormFieldData::FREE_TIMES.each do |time| %>
+              <option value='<%= time %>'><%= time %></option>
+            <% end %>
+          </select>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="submitButton">
+    <p style="color: grey">
+      <i class="grey info circle icon"></i>
+      Your friends can invite you any time, but, this lets them
+      know when you're normally free.
+    </p>
+    <button class="positive ui button" style="width: 100%">Done</button>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('select.dropdown').dropdown();
+  $('.selection.dropdown').attr('style', 'min-width: 11rem');
+</script>

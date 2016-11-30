@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  layout 'webview'
+  before_action :load_user, except: [:login_success]
 
   def login_success
     data = load_oauth_data
@@ -10,5 +12,33 @@ class UsersController < ApplicationController
     render 'login_success', layout: 'bare'
   end
 
+  def newsfeed
 
+  end
+
+  def friends
+
+  end
+
+  def activity
+
+  end
+
+  def goals
+
+  end
+
+  def availability
+
+  end
+
+  def interests
+
+  end
+
+  private
+
+  def load_user
+    @user = User.find(params[:user_id])
+  end
 end

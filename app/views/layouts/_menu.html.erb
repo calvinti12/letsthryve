@@ -1,0 +1,6 @@
+<div id="MainMenu" class="ui pointing menu">
+  <%= link_to 'Newsfeed', user_newsfeed_path(@user), class: 'item active' %>
+  <%= link_to 'Myself', user_activity_path(@user), class: 'item' %>
+  <%= link_to 'Friends', user_friends_path(@user), class: 'item' %>
+  <%= link_to 'Invite', '/invite', class: 'item' %>
+</div>

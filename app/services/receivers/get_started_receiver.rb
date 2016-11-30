@@ -11,7 +11,7 @@ class GetStartedReceiver < AbstractReceiver
       PromptSender
         .new(@user)
         .set_message(:introduction_part_2)
-        .add_url_button(title: 'Yes',
+        .add_url_button(title: 'Ok',
                         url: with_fb_login('/users/login_success', {user_id: @user.id}),
                         webview_size: 'tall',
                         use_extensions: true)
@@ -21,10 +21,17 @@ class GetStartedReceiver < AbstractReceiver
 
   def initial_preferences
     multi_message do
-      MessageSender.new(@user)
-          .set_message(:fb_setup_complete, name: @user.first_name, friends_count: @user.friends.count)
-          .deliver!
-      MediaSender.new(@user).set_image(@user.picture_url).deliver!
+      MessageSender
+        .new(@user)
+        .set_message(:fb_setup_complete, name: @user.first_name, friends_count: @user.friends.count)
+        .deliver!
+      PromptSender
+        .new(@user)
+        .set_message(:see_whats_happening)
+        .add_url_button(title: 'What\'s Happening',
+                        url: "/users/#{@user.id}/newsfeed", # TODO with_fb_login redirect
+                        webview_size: 'full',
+                        use_extensions: true)
     end
   end
 

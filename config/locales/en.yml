@@ -24,11 +24,14 @@ en:
     Help free %{random_name}! Free the UC Stones :)
 
   introduction_part_1: |
-    Hi, I'm ThryveBot! I can help you see which of your
-    friends want to hang out and when they're free!
+    Hi! Let's Thryve is an app that helps you and your
+    friends live a healthy lifestyle.
 
   introduction_part_2: |
-    First, I need permission to see your friends, is that ok?
+    To get started, can I see who your friends are?
 
   fb_setup_complete: |
     Hi %{name}! Looks like you have %{friends_count} friends using Let's Thryve!
+
+  see_whats_happening: |
+    Now you can see what your friends are up to!

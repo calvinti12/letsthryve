@@ -1,0 +1,50 @@
+#MainContainer {
+  padding-top: 1.5rem;
+  width: 22.5rem;
+  margin: auto;
+}
+
+#MainMenu .item {
+  flex-grow: 1;
+}
+
+
+
+#webview-content {
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+#webview-content .mainContainer {
+  margin: auto;
+  text-align: center;
+  width: 22.5rem;
+}
+
+#webview-content .infoContainer {
+  margin: auto;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#webview-content .infoImage {
+  margin-bottom: .25rem;
+  width: 10rem;
+}
+
+#webview-content .timeSelectContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#webview-content .submitButton {
+  margin: auto;
+  margin-top: 2em;
+  width: 22.5rem;
+  text-align: center;
+}
+
+#webview-content .flushBorder {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
