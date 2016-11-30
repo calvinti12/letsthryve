@@ -8,10 +8,8 @@
   flex-grow: 1;
 }
 
-
-
 #webview-content {
-  margin-top: 2rem;
+  margin-top: .5rem;
   margin-bottom: 5rem;
 }
 

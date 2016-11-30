@@ -1,27 +1,36 @@
 <style>
-  #UserProfileImage {
-    text-align: center;
+  #UserProfileImage .smallPaddedColumn {
+    padding: 14px 7px 7px 7px;
   }
 
   #UserProfileImage .image {
-    display: inline;
     width: 3rem;
+    margin: auto;
   }
 
   #UserProfileImage .text {
     font-weight: bold;
     font-size: 1.2em;
   }
+
+  #ProfileMenu .item {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
 </style>
 
-<div id="UserProfileImage">
-  <img src="/assets/israel.png"
-       class="ui medium circular image" />
-  <p class="text">Israel</p>
+<div id="UserProfileImage" class="ui grid">
+  <div class="six wide column smallPaddedColumn">
+    <img src="<%= @user.picture_url %>"
+         class="ui medium circular image" />
+  </div>
+  <div class="ten wide column" style="padding-top: 25px">
+    <span class="text">Israel Madueme</span>
+  </div>
 </div>
-<div class="ui top attached tabular menu">
-  <div class="item">Activity</div>
-  <div class="item">Goals</div>
-  <div class="item">Interests</div>
-  <div class="item">Availability</div>
+<div id="ProfileMenu" class="ui blue secondary pointing menu">
+  <%= link_to 'Activity', user_activity_path(@user), class: 'active item' %>
+  <%= link_to 'Goals', user_goals_path(@user), class: 'item' %>
+  <%= link_to 'Interests', user_interests_path(@user), class: 'item' %>
+  <%= link_to 'Availability', user_availability_path(@user), class: 'item' %>
 </div>

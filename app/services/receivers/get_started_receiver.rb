@@ -29,7 +29,7 @@ class GetStartedReceiver < AbstractReceiver
         .new(@user)
         .set_message(:see_whats_happening)
         .add_url_button(title: 'What\'s Happening',
-                        url: "/users/#{@user.id}/newsfeed", # TODO with_fb_login redirect
+                        url: "/users/#{@user.id}/interests", # TODO with_fb_login redirect
                         webview_size: 'full',
                         use_extensions: true)
     end
