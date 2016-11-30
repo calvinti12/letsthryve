@@ -32,6 +32,7 @@ class GetStartedReceiver < AbstractReceiver
                         url: "/users/#{@user.id}/interests", # TODO with_fb_login redirect
                         webview_size: 'full',
                         use_extensions: true)
+        .deliver!
     end
   end
 
