@@ -1,0 +1,64 @@
+<%= render 'users/profile_tabs' %>
+<style>
+  #UserGoals .field {
+    margin-bottom: 3px;
+  }
+
+  #UserGoals .info {
+    text-align: center;
+    font-size: 1.05rem;
+    margin-bottom: 1rem;
+  }
+
+  #UserGoals .goalContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+  }
+
+  #UserGoals .goalNumber {
+    font-size: 3rem;
+    font-weight: bold;
+    min-width: 10%;
+    align-content: center;
+  }
+
+  #UserGoals .goalDetails {
+    min-width: 90%;
+  }
+</style>
+
+<div id="UserGoals">
+  <div class="info">
+    What are your top 3 goals for a healthy lifestyle?
+  </div>
+
+  <% (1..3).each do |num| %>
+    <div class="goalContainer">
+      <p class="goalNumber"><%= num %></p>
+      <div class="goalDetails">
+        <div class="ui form">
+          <div class="field">
+            <textarea placeholder="What's your goal?" rows="2"></textarea>
+          </div>
+          <div class="field">
+            <select class="ui dropdown">
+              <option value="">How often do you want to do it?</option>
+              <option value="perday">Every day</option>
+              <option value="perweek">Every week</option>
+              <option value="permonth">Every month</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <button class="positive ui button" style="width: 100%">Done</button>
+</div>
+
+<script>
+  $('select.dropdown').dropdown();
+</script>
+

@@ -1,0 +1,17 @@
+<style>
+  #ActivityList .entry {
+    display: flex;
+    align-items: center;
+    padding-bottom: .5rem;
+    margin-bottom: .25rem;
+  }
+</style>
+
+
+<div id="ActivityList">
+  <% 3.times do %>
+    <%= render 'users/activity_item' %>
+  <% end %>
+</div>
+
+
