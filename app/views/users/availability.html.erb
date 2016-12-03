@@ -13,6 +13,19 @@
   #webview-content .smallSidePadding {
     padding: 7px 4px 7px 4px;
   }
+
+  #ShowAvailability .detail-day {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  #ShowAvailability .detail-time {
+    font-weight: bold;
+  }
+
+  #ShowAvailability .light-grey {
+    background-color: #E1E2E3;
+  }
 </style>
 
 <div id="webview-content">
@@ -51,6 +64,9 @@
     </p>
     <button class="positive ui button" style="width: 100%">Done</button>
   </div>
+</div>
+<div id="ShowAvailability">
+  <%= render 'users/availability_item' %>
 </div>
 
 <script type="text/javascript">

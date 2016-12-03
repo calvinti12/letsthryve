@@ -27,6 +27,20 @@
   #UserGoals .goalDetails {
     min-width: 90%;
   }
+
+  #ShowUserGoals .goal-description {
+    padding-top: 15px;
+  }
+
+  #ShowUserGoals .detail-title {
+    font-size: 0.7rem;
+    display: block;
+  }
+
+  #ShowUserGoals .super-mini {
+    font-size: 0.75rem;
+  }
+
 </style>
 
 <div id="UserGoals">
@@ -56,6 +70,10 @@
   <% end %>
 
   <button class="positive ui button" style="width: 100%">Done</button>
+</div>
+
+<div id="ShowUserGoals">
+  <%= render 'users/goal_item' %>
 </div>
 
 <script>
