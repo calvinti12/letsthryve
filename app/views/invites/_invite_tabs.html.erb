@@ -32,7 +32,7 @@
   </div>
 </div>
 <div id="InviteMenu" class="ui blue secondary pointing menu">
-  <%= link_to 'Create', user_activity_path(@user), class: 'active item' %>
-  <%= link_to 'Upcoming', user_goals_path(@user), class: 'item' %>
-  <%= link_to 'Past', user_interests_path(@user), class: 'item' %>
+  <%= link_to 'Create', new_invite_path(@user), class: 'active item' %>
+  <%= link_to 'Upcoming', upcoming_invites_path(@user), class: 'item' %>
+  <%= link_to 'Past', 'google.com', class: 'item' %>
 </div>

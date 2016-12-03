@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   # Invites
   get '/users/:user_id/invites/new', to: 'invites#new', as: :new_invite
+  get '/users/:user_id/invites/upcoming', to: 'invites#upcoming', as: :upcoming_invites
   get '/invites/:id/respond', to: 'invites#respond', as: :respond_invite
   get '/invites/:id/see_responses', to: 'invites#see_responses', as: :see_responses
 end

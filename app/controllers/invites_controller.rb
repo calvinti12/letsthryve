@@ -1,9 +1,11 @@
 class InvitesController < ApplicationController
   layout 'webview'
-  before_action :load_user, only: [:new]
+  before_action :load_user, only: [:new, :upcoming]
 
   def new
+  end
 
+  def upcoming
   end
 
   def respond
