@@ -1,0 +1,38 @@
+<style>
+  #UserProfileImage .smallPaddedColumn {
+    padding: 14px 7px 7px 7px;
+  }
+
+  #UserProfileImage .image {
+    width: 3rem;
+    margin: auto;
+  }
+
+  #UserProfileImage .text {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  #InviteMenu .item {
+    text-align: center;
+    padding-left: 33px;
+    padding-right: 13px;
+    min-width: 33.3%;
+
+  }
+</style>
+
+<div id="UserProfileImage" class="ui grid">
+  <div class="six wide column smallPaddedColumn">
+    <img src="/assets/israel.png"
+         class="ui medium circular image" />
+  </div>
+  <div class="ten wide column" style="padding-top: 25px">
+    <span class="text">Israel Madueme</span>
+  </div>
+</div>
+<div id="InviteMenu" class="ui blue secondary pointing menu">
+  <%= link_to 'Create', user_activity_path(@user), class: 'active item' %>
+  <%= link_to 'Upcoming', user_goals_path(@user), class: 'item' %>
+  <%= link_to 'Past', user_interests_path(@user), class: 'item' %>
+</div>
