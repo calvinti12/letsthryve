@@ -1,0 +1,29 @@
+<style>
+  #Friends .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .75rem;
+  }
+
+  #Friends .image {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  #Friends .name {
+    font-size: 1.4em;
+  }
+</style>
+
+<div id="Friends">
+<% 10.times do %>
+  <div class="container">
+    <img class="ui avatar image" src="/assets/israel.png">
+    <span class="name">Israel Madueme</span>
+    <button class="ui icon button">
+      <i class="chevron right icon"></i>
+    </button>
+  </div>
+<% end %>
+</div>

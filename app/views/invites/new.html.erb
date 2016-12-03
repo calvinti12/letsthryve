@@ -1,0 +1,67 @@
+<style>
+  #NewInvite .heading {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+</style>
+
+<div id="NewInvite" class="ui form">
+  <div class="heading">
+    <img src="/assets/israel.png" class="ui avatar image" />
+    <span>Create an invitation!</span>
+  </div>
+  <div class="ui labeled input">
+    <div class="ui label">What</div>
+    <select class="ui dropdown longerSelect">
+      <option value=''>Select all that apply</option>
+      <% FormFieldData::EXERCISE.each do |activity| %>
+        <option value="<%= activity %>"><%= activity %></option>
+      <% end %>
+    </select>
+  </div>
+  <br /><br />
+  <div class="ui labeled input">
+    <div class="ui label">Where</div>
+    <input type="text" placeholder="Location" style="width: 17.6rem">
+  </div>
+  <br /><br />
+  <div class="ui labeled input">
+    <div class="ui label">When</div>
+    <select class="ui dropdown dateSelect">
+      <option value=''>Month</option>
+      <% FormFieldData::EXACT_MONTHS.each do |month| %>
+        <option value="<%= month %>"><%= month %></option>
+      <% end %>
+    </select>
+    <select class="ui dropdown dateSelect">
+      <option value=''>Day</option>
+      <% FormFieldData::EXACT_DAYS.each do |day| %>
+        <option value="<%= day %>"><%= day %></option>
+      <% end %>
+    </select>
+    <select class="ui dropdown dateSelect">
+      <option value=''>Time</option>
+      <% FormFieldData::EXACT_TIMES.each do |time| %>
+        <option value="<%= time %>"><%= time %></option>
+      <% end %>
+    </select>
+  </div>
+  <br /><br />
+  <div class="ui labeled input">
+    <div class="ui label">Details</div>
+    <input type="text" placeholder="What details" style="width: 17.6rem">
+  </div>
+  <br /><br />
+  <button class="positive ui button" style="width: 100%">Create</button>
+</div>
+
+<script>
+  $('select.dropdown').dropdown();
+  $('.selection.dropdown.longerSelect').attr('style', 'min-width: 18rem');
+  $('.selection.dropdown.dateSelect').attr('style', 'min-width: 5.8rem');
+</script>

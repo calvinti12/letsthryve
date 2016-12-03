@@ -15,5 +15,8 @@ Rails.application.routes.draw do
   get '/users/:user_id/interests', to: 'users#interests', as: :user_interests
   get '/users/:user_id/availability', to: 'users#availability', as: :user_availability
 
-
+  # Invites
+  get '/users/:user_id/invites/new', to: 'invites#new', as: :new_invite
+  get '/invites/:id/respond', to: 'invites#respond', as: :respond_invite
+  get '/invites/:id/see_responses', to: 'invites#see_responses', as: :see_responses
 end
