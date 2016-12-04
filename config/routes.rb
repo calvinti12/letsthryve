@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   # Jeanine routes
   get '/users/:user_id/edit_interests', to: 'users#edit_interests', as: :edit_interests
   post '/users/:user_id/set_interests', to: 'users#set_interests', as: :set_interests
+  post '/invites/:id/create_invite', to: 'invites#create_invite', as: :create_invite
 end

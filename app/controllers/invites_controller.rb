@@ -12,6 +12,10 @@ class InvitesController < ApplicationController
     render 'respond', layout: 'webview_no_menu'
   end
 
+  def create_invite
+    
+  end
+
   private
 
   def load_user
