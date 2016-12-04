@@ -31,3 +31,4 @@
 .env.production
 
 # Ignore public assets
+/public/assets
