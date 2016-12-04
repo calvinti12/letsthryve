@@ -12,7 +12,7 @@ class GetStartedReceiver < AbstractReceiver
         .new(@user)
         .set_message(:introduction_part_2)
         .add_url_button(title: 'Ok',
-                        url: with_fb_login('/users/login_success', {user_id: @user.id}),
+                        url: with_fb_login('/login_success', {current_user: @user.id}),
                         webview_size: 'tall',
                         use_extensions: true)
         .deliver!
@@ -30,7 +30,11 @@ class GetStartedReceiver < AbstractReceiver
         .new(@user)
         .set_message(:see_whats_happening)
         .add_url_button(title: 'What\'s Happening',
-                        url: "/users/#{@user.id}/interests", # TODO with_fb_login redirect
+                        url: with_fb_login('/newsfeed', {current_user: @user.id}),
+                        webview_size: 'full',
+                        use_extensions: true)
+        .add_url_button(title: 'New Invite',
+                        url: with_fb_login('/invites/new', {current_user: @user.id}),
                         webview_size: 'full',
                         use_extensions: true)
         .deliver!
@@ -39,7 +43,8 @@ class GetStartedReceiver < AbstractReceiver
       sender.add_card(title: 'Invitation: Running. Dec 12 @ 9pm - Schenely Park',
                       subtitle: 'This is the details of the event, it is important to read the details',
                       image_url: 'thryve.png')
-            .add_url_button(url: '/invites/1/respond', webview_size: 'tall', as_default_action: true)
+            .add_url_button(url: with_fb_login('/invites/respond', {invite_id: 1}),
+                            webview_size: 'tall', as_default_action: true)
             .add_share_button
       sender.deliver!
     end

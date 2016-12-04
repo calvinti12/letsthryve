@@ -7,6 +7,12 @@ class FacebookProfileService
 
   def update_profile
     profile_data = get_profile
+
+    if @user.nil?
+      @user = User.where(fb_profile_id: profile_data[:id]).first
+      @user = User.create if @user.nil?
+    end
+
     @user.update_attributes({
       fb_profile_id: profile_data[:id],
       first_name: profile_data[:first_name],
@@ -20,6 +26,7 @@ class FacebookProfileService
         Friendship.find_or_create_by(user_id: @user.id, friend_id: friend.id)
       end
     end
+    @user
   end
 
   private
