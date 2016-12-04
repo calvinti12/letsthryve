@@ -20,6 +20,10 @@ class InvitesController < ApplicationController
 
   end
 
+  def create_invite
+    
+  end
+
   private
 
   def load_user
