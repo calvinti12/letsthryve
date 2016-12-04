@@ -51,56 +51,56 @@
   <div class="infoContainer">
     <p style="font-size: 1.1rem">What are your favorite things to do together?</p>
   </div>
-
-  <div class="mainContainer">
-    <div class="ui labeled input activity">
-      <div class="ui label labelText">
-        Exercise
+  <form class="ui form" action="/users/login_success" method="GET">
+    <div class="field">
+      <div class="ui labeled input activity">
+        <div class="ui label labelText">
+          Exercise
+        </div>
+        <select multiple class="ui search dropdown flushBorder" name="exercises[]">
+          <option value=''>Select all that apply</option>
+          <% FormFieldData::EXERCISE.each do |activity| %>
+            <option value="<%= activity %>"><%= activity %></option>
+          <% end %>
+        </select>
       </div>
-      <select multiple class="ui dropdown flushBorder">
-        <option value=''>Select all that apply</option>
-        <% FormFieldData::EXERCISE.each do |activity| %>
-          <option value="<%= activity %>"><%= activity %></option>
-        <% end %>
-      </select>
     </div>
-    <br />
-
-    <div class="ui labeled input activity">
-      <div class="ui label labelText">
-        Hang Out
+    <div class="field">
+      <div class="ui labeled input activity">
+        <div class="ui label labelText">
+          Hang Out
+        </div>
+        <select multiple class="ui search dropdown flushBorder" name="hangouts[]">
+          <option value=''>Select all that apply</option>
+          <% FormFieldData::HANGOUT.each do |activity| %>
+            <option value="<%= activity %>"><%= activity %></option>
+          <% end %>
+        </select>
       </div>
-      <select multiple class="ui dropdown flushBorder">
-        <option value=''>Select all that apply</option>
-        <% FormFieldData::HANGOUT.each do |activity| %>
-          <option value="<%= activity %>"><%= activity %></option>
-        <% end %>
-      </select>
     </div>
-    <br />
-
-    <div class="ui labeled input activity">
-      <div class="ui label labelText">
-        On Campus
+    <div class="field">
+      <div class="ui labeled input activity">
+        <div class="ui label labelText">
+          On Campus
+        </div>
+        <select multiple class="ui search dropdown flushBorder" name="onCampus[]">
+          <option value=''>Select all that apply</option>
+          <% FormFieldData::ONCAMPUS.each do |activity| %>
+            <option value="<%= activity %>"><%= activity %></option>
+          <% end %>
+        </select>
       </div>
-      <select multiple class="ui dropdown flushBorder">
-        <option value=''>Select all that apply</option>
-        <% FormFieldData::ONCAMPUS.each do |activity| %>
-          <option value="<%= activity %>"><%= activity %></option>
-        <% end %>
-      </select>
     </div>
-    <br />
-  </div>
 
-  <div class="submitButton">
-    <p style="color: grey">
-      <i class="grey info circle icon"></i>
-      Your friends can invite you to any activity, but, this lets them
-      know what you <strong>really</strong> love to do!
-    </p>
-    <button class="ui positive fluid button">Done</button>
-  </div>
+    <div class="submitButton">
+      <p style="color: grey">
+        <i class="grey info circle icon"></i>
+        Your friends can invite you to any activity, but, this lets them
+        know what you <strong>really</strong> love to do!
+      </p>
+      <input type="submit" value="Done" class="ui positive fluid button" />
+    </div>
+  </form>
 </div>
 
 

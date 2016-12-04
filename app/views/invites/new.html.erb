@@ -22,41 +22,54 @@
   #NewInvite > .inviteSubmit {
     width: 100%;
   }
+
 </style>
-<div id="NewInvite" class="ui form">
+<form id="NewInvite" class="ui form" action="/users/login_success" method="GET">
   <!-- What -->
-  <div class="ui labeled input inviteField">
-    <div class="ui label">What</div>
-    <select class="ui dropdown">
-      <option value=''>Select all that apply</option>
-      <% FormFieldData::ACTIVITIES.each do |activity| %>
-        <option value="<%= activity %>"><%= activity %></option>
-      <% end %>
-    </select>
+  <div class="field">
+    <div class="ui labeled input inviteField" style="margin-bottom:14px;">
+      <div class="ui label">What</div>
+      <div class="ui search" style="width:100%;">
+        <div class="ui icon input">
+          <input name="what" class="prompt" type="text" placeholder="Select an activity, e.g. Tennis">
+          <i class="search icon">
+        </i>
+      </div>
+    </div>
   </div>
 
   <!-- Details -->
-  <div class="ui labeled input inviteField">
-    <div class="ui label">Details</div>
-    <input type="text" placeholder="What details">
+  <div class="field">
+    <div class="ui labeled input inviteField">
+      <div class="ui label">Details</div>
+      <input name="details" type="text" placeholder="e.g. Let's burn some calories!">
+    </div>
   </div>
 
   <!-- Where -->
-  <div class="ui labeled input inviteField">
-    <div class="ui label">Where</div>
-    <input type="text" placeholder="Location">
+  <div class="field">
+    <div class="ui labeled input inviteField">
+      <div class="ui label">Where</div>
+      <input name="where" type="text" placeholder="e.g. 5000 Forbes Ave.">
+    </div>
   </div>
 
   <!-- When -->
-  <div class="ui labeled input inviteField">
-    <div class="ui label">When</div>
-    <input type="text" placeholder="e.g. Friday at 8pm, anytime, etc">
+  <div class="field">
+    <div class="ui labeled input inviteField">
+      <div class="ui label">When</div>
+      <input name="when" type="text" placeholder="e.g. Friday at 8pm, anytime, etc">
+    </div>
   </div>
 
   <!-- Submit -->
-  <button class="ui positive inviteSubmit button">Create</button>
+  <input type="submit" value="Create" class="ui positive inviteSubmit button" />
 </div>
 
 <script>
   $('select.dropdown').dropdown();
+  $('.ui.search')
+    .search({
+      source: <%== FormFieldData::ACTIVITIES.map{ |activity| {title: activity} }.to_json %>
+    });
 </script>
