@@ -19,4 +19,16 @@ Rails.application.routes.draw do
   get '/users/:user_id/invites/new', to: 'invites#new', as: :new_invite
   get '/users/:user_id/invites/upcoming', to: 'invites#upcoming', as: :upcoming_invites
   get '/invites/:id/respond', to: 'invites#respond', as: :respond_invite
+
+  # Israel
+  post '/users/:user_id/new_goal', to: 'users#new_goal', as: :new_goal
+  post '/goal/:goal_id/encourage', to: 'users#encourage', as: :encourage
+  get '/goal/:goal_id/log', to: 'users#log_goal', as: :log_goal
+
+  get '/users/:user_id/edit_availability', to: 'users#edit_availability', as: :edit_availability
+  post '/users/:user_id/set_availability', to: 'users#set_availability', as: :set_availability
+
+  post '/invites/:id/accept', to: 'invites#accept', as: :accept_invite
+  post '/invites/:id/decline', to: 'invites#decline', as: :decline_invite
+
 end

@@ -28,7 +28,27 @@ class UsersController < ApplicationController
 
   end
 
+  def new_goal
+
+  end
+
+  def encourage
+
+  end
+
+  def log_goal
+
+  end
+
   def availability
+
+  end
+
+  def edit_availability
+
+  end
+
+  def set_availability
 
   end
 
