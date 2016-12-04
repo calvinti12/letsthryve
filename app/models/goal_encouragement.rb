@@ -1,8 +1,13 @@
 class GoalEncouragement < ApplicationRecord
+	# Relationships
 	belongs_to :goal
-	belongs_to :user, through: :goal
+	belongs_to :user
+  
+  # Scopes
+	scope :chronological, -> { order('created_at DESC') }
 
-	scope :chronological, { order('created_at DESC') }
+	# Methods
+
 end
 
 # == Schema Information
