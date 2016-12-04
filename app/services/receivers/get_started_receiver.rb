@@ -25,6 +25,7 @@ class GetStartedReceiver < AbstractReceiver
         .new(@user)
         .set_message(:fb_setup_complete, name: @user.first_name, friends_count: @user.friends.count)
         .deliver!
+
       PromptSender
         .new(@user)
         .set_message(:see_whats_happening)
@@ -32,11 +33,15 @@ class GetStartedReceiver < AbstractReceiver
                         url: "/users/#{@user.id}/interests", # TODO with_fb_login redirect
                         webview_size: 'full',
                         use_extensions: true)
-        .add_url_button(title: 'What\'s Happening',
-                        url: "/invites/1/respond", # TODO with_fb_login redirect
-                        webview_size: 'tall',
-                        use_extensions: false)
         .deliver!
+
+      sender = CardSender.new(@user)
+      sender.add_card(title: 'Invitation: Running. Dec 12 @ 9pm - Schenely Park',
+                      subtitle: 'This is the details of the event, it is important to read the details',
+                      image_url: 'thryve.png')
+            .add_url_button(url: '/invites/1/respond', webview_size: 'tall', as_default_action: true)
+            .add_share_button
+      sender.deliver!
     end
   end
 
