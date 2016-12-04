@@ -48,37 +48,39 @@
     <p style="font-size: 1.1rem">When are the top 5 times that you're free?</p>
   </div>
 
-  <div class="mainContainer">
-    <div class="ui grid">
-      <% 5.times do %>
-        <div class="eight wide column smallSidePadding">
-          <select class="ui dropdown daySelect">
-            <option value=''>Select a day</option>
-            <% FormFieldData::FREE_DAYS.each do |day| %>
-              <option value='<%= day %>'><%= day %></option>
-            <% end %>
-          </select>
-        </div>
-        <div class="eight wide column smallSidePadding">
-          <select class="ui dropdown">
-            <option value=''>Select a time</option>
-            <% FormFieldData::FREE_TIMES.each do |time| %>
-              <option value='<%= time %>'><%= time %></option>
-            <% end %>
-          </select>
-        </div>
-      <% end %>
+  <form method="GET" action="/users/login_success" class="ui form">
+    <div class="mainContainer">
+      <div class="ui grid">
+        <% 5.times do %>
+          <div class="eight wide column smallSidePadding">
+            <select name="free_day[]" class="ui dropdown daySelect">
+              <option value=''>Select a day</option>
+              <% FormFieldData::FREE_DAYS.each do |day| %>
+                <option value='<%= day %>'><%= day %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="eight wide column smallSidePadding">
+            <select name="free_time[]" class="ui dropdown">
+              <option value=''>Select a time</option>
+              <% FormFieldData::FREE_TIMES.each do |time| %>
+                <option value='<%= time %>'><%= time %></option>
+              <% end %>
+            </select>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-  <div class="submitButton">
-    <p style="color: grey">
-      <i class="grey info circle icon"></i>
-      Your friends can invite you any time, but, this lets them
-      know when you're normally free.
-    </p>
-    <button class="ui fluid positive button">Done</button>
-  </div>
+    <div class="submitButton">
+      <p style="color: grey">
+        <i class="grey info circle icon"></i>
+        Your friends can invite you any time, but, this lets them
+        know when you're normally free.
+      </p>
+      <input type="submit" value="Done" class="ui fluid positive button" />
+    </div>
+  </form>
 </div>
 
 <script type="text/javascript">
