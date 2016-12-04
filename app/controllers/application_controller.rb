@@ -4,11 +4,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def load_current_user
+    return if dev_mode?
     @current_user = User.find_by_id(session[:current_user])
     raise 'Unable to load user. Did you pass through FB login?' unless @current_user
   end
 
   def load_fb_user(route)
+    return if dev_mode?
     @current_user = User.find_by_id(session[:current_user])
     unless @current_user
       data = Rack::Utils.parse_nested_query(params[:state]).deep_symbolize_keys
@@ -17,6 +19,15 @@ class ApplicationController < ActionController::Base
       fb_service.update_profile
       session[:current_user] = @current_user.id
     end
+  end
+
+  def dev_mode?
+    if Rails.env.development?
+      @current_user = User.first
+      @invite = Invitation.first
+      return true
+    end
+    false
   end
 
 end

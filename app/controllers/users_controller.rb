@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   layout 'webview'
   before_action :load_current_user, except: [:login_success, :newsfeed]
-  before_action :load_user, only: [:activity, :goals]
+  before_action :load_user, only: [:activity, :goals, :interests, :availability]
 
   def login_success
     load_fb_user('/login_success')
