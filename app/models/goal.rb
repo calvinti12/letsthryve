@@ -1,14 +1,14 @@
 class Goal < ApplicationRecord
   
-	GOAL_STATES = [['Failed', 0], ['Tried', 1], ['Completed', 2], ['Not Complete', 3]]
+	GOAL_STATES = ['Failed', 'Tried', 'Complete', 'Not Complete']
 
 	# Relationships
-	belongs_to: user
+	belongs_to :user
 
 	# Scopes
-	scope :for_user, ->(user) { where(user: user) }
-	scope :by_complete, { order('state DESC') }
-	scope :chronological, { order('created_at DESC') }
+	scope :for_user, -> (user) { where(user: user) }
+	scope :by_complete, -> { order('state DESC') }
+	scope :chronological, -> { order('created_at DESC') }
 
 	# Methods
   
