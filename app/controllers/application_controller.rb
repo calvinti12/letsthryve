@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def load_user
+  def load_current_user
     @current_user = User.find_by_id(session[:current_user])
     raise 'Unable to load user. Did you pass through FB login?' unless @current_user
   end
