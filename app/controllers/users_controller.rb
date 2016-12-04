@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   layout 'webview'
   before_action :load_current_user, except: [:login_success, :newsfeed]
+  before_action :load_user, only: [:activity, :goals]
 
   def login_success
     load_fb_user('/login_success')
@@ -59,6 +60,12 @@ class UsersController < ApplicationController
 
   def set_interests
 
+  end
+
+  private
+
+  def load_user
+    @user = User.find(params[:user_id])
   end
 
 end
