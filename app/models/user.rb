@@ -15,6 +15,8 @@ end
 #  picture_url       :string
 #  ignore            :boolean          default(FALSE)
 #  last_message_sent :string
+#  interests         :string
+#  availability      :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
