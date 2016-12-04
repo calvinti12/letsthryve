@@ -55,34 +55,36 @@
     </div>
     <div style="margin-top: .75rem"></div>
     <div class="goalButtons">
-      <button class="ui green button">Did it!</button>
-      <button class="ui lightgrey button">Tried</button>
-      <button class="ui red button">Didn't</button>
+      <%= link_to 'Did it!', user_goals_path(@user), class: 'ui green button' %>
+      <%= link_to 'Tried', user_goals_path(@user), class: 'ui lightgrey button' %>
+      <%= link_to 'Didn\'t', user_goals_path(@user), class: 'ui red button' %>
     </div>
     <div class="ui grey message">Completed this goal on Jan 1 2017!</div>
-    <div class="ui fluid action input">
-      <input type="text" placeholder="Encourage Israel!">
-      <button class="ui green button">Encourage</button>
-    </div>
+
+    <form method="GET" action="/users/login_success">
+      <div class="ui fluid action input">
+        <input name="message" type="text" placeholder="Encourage Israel!">
+        <button type="submit" class="ui green button">Encourage</button>
+      </div>
+    </form>
   </div>
 </div>
-
 
 <div id="NewGoal" class="ui segment">
   <div class="info">
     Create a New Goal
   </div>
-  <div class="ui form">
+  <form method="GET" action="/users/login_success" class="ui form">
     <div class="field">
-      <textarea placeholder="What's your goal?" rows="2"></textarea>
+      <textarea name="goalText" placeholder="What's your goal?" rows="2"></textarea>
     </div>
-  </div>
-  <p style="color: grey;">
-    <i class="grey info circle icon"></i>
-    Your friends will be able to see your goals and encourage you!
-    Don't let them down!
-  </p>
-  <button class="ui positive fluid button">Create</button>
+    <p style="color: grey;">
+      <i class="grey info circle icon"></i>
+      Your friends will be able to see your goals and encourage you!
+      Don't let them down!
+    </p>
+    <input type="submit" value="Done" class="ui positive fluid button" />
+  </form>
 </div>
 
 <script>
