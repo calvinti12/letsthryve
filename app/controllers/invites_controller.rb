@@ -9,11 +9,7 @@ class InvitesController < ApplicationController
   end
 
   def respond
-    render 'respond', layout: 'application'
-  end
-
-  def see_responses
-    render 'see_responses', layout: 'application'
+    render 'respond', layout: 'webview_no_menu'
   end
 
   private

@@ -1,22 +1,79 @@
-<div class="ui cards">
-  <div class="card">
-    <div class="content">
-      <img class="right floated mini ui image" src="/assets/israel.png">
-      <div class="header">
-        Elliot Fu
-      </div>
-      <div class="meta">
-        Friends of Veronika
-      </div>
-      <div class="description">
-        Elliot requested permission to view your contact details
-      </div>
+<style>
+  #RespondInvite .responseButtons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #RespondInvite .responseButtons > a {
+    width: 47%;
+  }
+
+  #RespondInvite > .content > .mainHeader {
+    font-size: 1.1rem;
+  }
+
+  #RespondInvite > .content > .location {
+    margin-top: .15rem;
+  }
+
+  #RespondInvite > .content .icon {
+    margin-right: 1px;
+    margin-bottom: .25rem;
+  }
+</style>
+
+<div id="RespondInvite"  class="ui fluid card">
+  <div class="content">
+    <div class="header mainHeader">
+      Running
+      <span style="float: right">Dec 12 @ 9pm</span>
     </div>
-    <div class="extra content">
-      <div class="ui two buttons">
-        <div class="ui basic green button">Approve</div>
-        <div class="ui basic red button">Decline</div>
-      </div>
+  </div>
+  <div class="content">
+    <div class="ui sub header"><i class="user icon"></i> Israel Madueme</div>
+    <div class="ui sub header location"><i class="world icon"></i> Schenely Park</div>
+    <p><i class="info icon"></i> This is the details of the event. It gives more details about the event</p>
+
+    <%= render 'invites/response_list' %>
+    <br />
+    <div class="responseButtons">
+      <a class="ui positive button">Accept</a>
+      <a class="ui negative button">Decline</a>
     </div>
   </div>
 </div>
+
+<!-- if no fb_messenger_id -->
+<p style="color: grey; margin-top: .75rem">
+  <i class="grey help circle icon"></i>
+  Let's Thryve is a Messenger bot that helps you find friends to exercise and hangout with.
+  Click 'Send to Messenger' below to start using the bot!
+</p>
+<div class="ui right aligned container fb-send-to-messenger"
+  style="margin-right: 0 !important;"
+  messenger_app_id="<%= ENV['FB_APP_ID'] %>"
+  page_id="<%= ENV['FB_PAGE_ID'] %>"
+  data-ref="MessagedUs"
+  color="white"
+  size="large">
+</div>
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "APP_ID",
+      xfbml: true,
+      version: "v2.6"
+    });
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) { return; }
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+</script>

@@ -1,68 +1,62 @@
+<%= render 'invites/invite_tabs' %>
+
 <style>
-  #NewInvite .heading {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+  #NewInvite > .inviteField {
+    margin-bottom: .75rem;
   }
 
-</style>
+  #NewInvite > .inviteField > input {
+    width: 17.6rem;
+  }
 
-<%= render 'invites/invite_tabs' %>
+  #NewInvite > .inviteField > .label {
+    width: 5rem;
+  }
+
+  #NewInvite > .inviteField > .dropdown {
+    width: 17.5rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  #NewInvite > .inviteSubmit {
+    width: 100%;
+  }
+</style>
 <div id="NewInvite" class="ui form">
-  <!--<div class="heading">-->
-    <!--<img src="/assets/israel.png" class="ui avatar image" />-->
-    <!--<span>Create an invitation!</span>-->
-  <!--</div>-->
-  <div class="ui labeled input">
+  <!-- What -->
+  <div class="ui labeled input inviteField">
     <div class="ui label">What</div>
-    <select class="ui dropdown longerSelect">
+    <select class="ui dropdown">
       <option value=''>Select all that apply</option>
-      <% FormFieldData::EXERCISE.each do |activity| %>
+      <% FormFieldData::ACTIVITIES.each do |activity| %>
         <option value="<%= activity %>"><%= activity %></option>
       <% end %>
     </select>
   </div>
-  <br /><br />
-  <div class="ui labeled input">
-    <div class="ui label">Where</div>
-    <input type="text" placeholder="Location" style="width: 17.6rem">
-  </div>
-  <br /><br />
-  <div class="ui labeled input">
-    <div class="ui label">When</div>
-    <select class="ui dropdown dateSelect">
-      <option value=''>Month</option>
-      <% FormFieldData::EXACT_MONTHS.each do |month| %>
-        <option value="<%= month %>"><%= month %></option>
-      <% end %>
-    </select>
-    <select class="ui dropdown dateSelect">
-      <option value=''>Day</option>
-      <% FormFieldData::EXACT_DAYS.each do |day| %>
-        <option value="<%= day %>"><%= day %></option>
-      <% end %>
-    </select>
-    <select class="ui dropdown dateSelect">
-      <option value=''>Time</option>
-      <% FormFieldData::EXACT_TIMES.each do |time| %>
-        <option value="<%= time %>"><%= time %></option>
-      <% end %>
-    </select>
-  </div>
-  <br /><br />
-  <div class="ui labeled input">
+
+  <!-- Details -->
+  <div class="ui labeled input inviteField">
     <div class="ui label">Details</div>
-    <input type="text" placeholder="What details" style="width: 17.6rem">
+    <input type="text" placeholder="What details">
   </div>
-  <br /><br />
-  <button class="positive ui button" style="width: 100%">Create</button>
+
+  <!-- Where -->
+  <div class="ui labeled input inviteField">
+    <div class="ui label">Where</div>
+    <input type="text" placeholder="Location">
+  </div>
+
+  <!-- When -->
+  <div class="ui labeled input inviteField">
+    <div class="ui label">When</div>
+    <input type="text" placeholder="e.g. Friday at 8pm, anytime, etc">
+  </div>
+
+  <!-- Submit -->
+  <button class="ui positive inviteSubmit button">Create</button>
 </div>
 
 <script>
   $('select.dropdown').dropdown();
-  $('.selection.dropdown.longerSelect').attr('style', 'min-width: 18rem');
-  $('.selection.dropdown.dateSelect').attr('style', 'min-width: 5.8rem');
 </script>

@@ -1,2 +1,20 @@
-<%= render 'users/log_list' %>
+<style>
+  #NewsfeedMenu > .item {
+    min-width: 50%;
+  }
+
+  #NewsfeedMenu > .item > span {
+    margin: auto;
+  }
+</style>
+
+<div id="NewsfeedMenu" class="ui blue secondary pointing menu">
+  <a href="<%= user_newsfeed_path(@user) %>" class="active item">
+    <span>Just Friends</span>
+  </a>
+  <a href="<%= user_newsfeed_path(@user) %>" class="item">
+    <span>All Campus</span>
+  </a>
+</div>
+
 <%= render 'users/activity_list' %>

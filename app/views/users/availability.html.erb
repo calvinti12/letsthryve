@@ -14,19 +14,34 @@
     padding: 7px 4px 7px 4px;
   }
 
-  #ShowAvailability .detail-day {
+  #AvailabilityList .detail-day {
     font-size: 1em;
     font-weight: bold;
   }
 
-  #ShowAvailability .detail-time {
+  #AvailabilityList .detail-time {
     font-weight: bold;
   }
 
-  #ShowAvailability .light-grey {
+  #AvailabilityList .light-grey {
     background-color: #E1E2E3;
   }
 </style>
+
+<div id="AvailabilityList">
+  <div class="ui segment">
+    <div class="ui equal width center aligned grid">
+      <div class="centered column green">
+        <span class="detail-day">Wednesday</span>
+      </div>
+      <div class="centered column">
+        <span class="detail-time">5 AM</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="ui lightgrey fluid button">Edit</button>
+</div>
 
 <div id="webview-content">
   <div class="infoContainer">
@@ -62,23 +77,11 @@
       Your friends can invite you any time, but, this lets them
       know when you're normally free.
     </p>
-    <button class="positive ui button" style="width: 100%">Done</button>
-  </div>
-</div>
-<div id="ShowAvailability">
-  <div class="ui segment">
-    <div class="ui equal width center aligned grid">
-      <div class="centered column light-grey">
-        <span class="detail-day">Wednesday</span>
-      </div>
-      <div class="centered column">
-        <span class="detail-time">5 AM</span>
-      </div>
-    </div>
+    <button class="ui fluid positive button">Done</button>
   </div>
 </div>
 
 <script type="text/javascript">
   $('select.dropdown').dropdown();
-  $('.selection.dropdown').attr('style', 'min-width: 11rem');
+  $('.selection.dropdown').attr('style', 'min-width: 10.5rem');
 </script>

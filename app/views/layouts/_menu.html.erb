@@ -1,3 +1,9 @@
+<style>
+  #MainMenu .item {
+    flex-grow: 1;
+  }
+</style>
+
 <div id="MainMenu" class="ui pointing menu">
   <%= link_to 'Newsfeed', user_newsfeed_path(@user), class: 'item active' %>
   <%= link_to 'Myself', user_activity_path(@user), class: 'item' %>

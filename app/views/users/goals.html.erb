@@ -1,101 +1,92 @@
 <%= render 'users/profile_tabs' %>
 <style>
-  #UserGoals .field {
-    margin-bottom: 3px;
-  }
-
-  #UserGoals .info {
+  #NewGoal > .info {
     text-align: center;
-    font-size: 1.05rem;
+    font-size: 1.3rem;
     margin-bottom: 1rem;
   }
 
-  #UserGoals .goalContainer {
+  #GoalList .goal > .description {
+    padding-top: .75rem;
+    margin-bottom: .75rem;
+  }
+
+  #GoalList .goal > .goalButtons {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: .5rem;
   }
 
-  #UserGoals .goalNumber {
-    font-size: 3rem;
-    font-weight: bold;
-    min-width: 10%;
-    align-content: center;
+  #GoalList .goal > .goalButtons > button {
+    width: 30%;
   }
 
-  #UserGoals .goalDetails {
-    min-width: 90%;
+  #GoalList .encouragedCount {
+    color: #2185D0;
   }
 
-  #ShowUserGoals .goal-description {
-    padding-top: 15px;
+  #GoalList .message {
+    text-align: center;
   }
-
-  #ShowUserGoals .detail-title {
-    font-size: 0.7rem;
-    display: block;
-  }
-
-  #ShowUserGoals .super-mini {
-    font-size: 0.75rem;
-  }
-
 </style>
 
-<div id="UserGoals">
-  <div class="info">
-    What are your top 3 goals for a healthy lifestyle?
-  </div>
-
-  <% (1..3).each do |num| %>
-    <div class="goalContainer">
-      <p class="goalNumber"><%= num %></p>
-      <div class="goalDetails">
-        <div class="ui form">
-          <div class="field">
-            <textarea placeholder="What's your goal?" rows="2"></textarea>
-          </div>
-          <div class="field">
-            <select class="ui dropdown">
-              <option value="">How often do you want to do it?</option>
-              <option value="perday">Every day</option>
-              <option value="perweek">Every week</option>
-              <option value="permonth">Every month</option>
-            </select>
-          </div>
-        </div>
+<div id="GoalList">
+  <div class="ui segment goal">
+    <a class="ui ribbon label">Goal started Dec 3, 2016</a>
+    <div class="description">I want to be able to run a marathon by the end of the year and place above 50.</div>
+    <div class="ui styled fluid accordion">
+      <div class="title">
+        <i class="dropdown icon"></i>
+        <span class="encouragedCount">55 people have encouraged you!</span>
+      </div>
+      <div class="content">
+        <p>
+          <img class="ui avatar image" src="/assets/israel.png" />
+          <span>You can do it! Keep going!</span>
+        </p>
+        <p>
+          <img class="ui avatar image" src="/assets/Christabelle.jpg" />
+          <span>You can do it! Keep going! The sky is the limit man!!</span>
+        </p>
+        <p>
+          <img class="ui avatar image" src="/assets/fish.png" />
+          <span>I believe in you! You can totally do this bro!</span>
+        </p>
       </div>
     </div>
-  <% end %>
-
-  <button class="positive ui button" style="width: 100%">Done</button>
+    <div style="margin-top: .75rem"></div>
+    <div class="goalButtons">
+      <button class="ui green button">Did it!</button>
+      <button class="ui lightgrey button">Tried</button>
+      <button class="ui red button">Didn't</button>
+    </div>
+    <div class="ui grey message">Completed this goal on Jan 1 2017!</div>
+    <div class="ui fluid action input">
+      <input type="text" placeholder="Encourage Israel!">
+      <button class="ui green button">Encourage</button>
+    </div>
+  </div>
 </div>
 
-<div id="ShowUserGoals">
-  <div class="ui segment">
-    <a class="ui ribbon label">GOAL ONE</a>
-    <a class="ui button super-mini">LIKE</a>
-    <a class="ui button super-mini">ENCOURAGE</a>
-    <div class="goal-description">I want to be able to run a marathon by the end of the year and place above 50.</div>
-    <div class="goal-details ui equal width center aligned padded grid">
-      <div class="detail-item centered column">
-        <span class="detail-title">Likes</span>
-        <span class="likes">55</span>
-      </div>
-      <div class="detail-item centered column">
-        <span class="detail-title">Encouragements</span>
-        <span class="encourages">1000</span>
-      </div>
-      <div class="detail-item centered column">
-        <span class="detail-title">Frequency</span>
-        <span class="frequency">Every day</span>
-      </div>
+
+<div id="NewGoal" class="ui segment">
+  <div class="info">
+    Create a New Goal
+  </div>
+  <div class="ui form">
+    <div class="field">
+      <textarea placeholder="What's your goal?" rows="2"></textarea>
     </div>
   </div>
+  <p style="color: grey;">
+    <i class="grey info circle icon"></i>
+    Your friends will be able to see your goals and encourage you!
+    Don't let them down!
+  </p>
+  <button class="ui positive fluid button">Create</button>
 </div>
 
 <script>
   $('select.dropdown').dropdown();
+  $('.ui.accordion').accordion();
 </script>
 

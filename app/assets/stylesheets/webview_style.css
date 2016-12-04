@@ -1,11 +1,17 @@
-#MainContainer {
-  padding-top: 1.5rem;
-  width: 22.5rem;
-  margin: auto;
+#InviteResponses > .content > .ui.list > .item {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
 }
 
-#MainMenu .item {
+#InviteResponses > .content > .ui.list > .item > span{
+  text-align: center;
   flex-grow: 1;
+}
+
+#InviteResponses > .content > .ui.list > .item > div{
+  min-width: 28%;
 }
 
 #webview-content {

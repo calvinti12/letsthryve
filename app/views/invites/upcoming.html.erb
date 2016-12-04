@@ -1,19 +1,34 @@
 <%= render 'invites/invite_tabs' %>
 
+<style>
+  #UpcomingInvites > .content > .mainHeader {
+    font-size: 1.1rem;
+  }
 
-<div class="ui styled accordion">
-  
-  <div class="title">
-    <i class="dropdown icon"></i>
-    Level 2C
+  #UpcomingInvites > .content > .location {
+    margin-top: .15rem;
+  }
+
+  #UpcomingInvites > .content .icon {
+    margin-right: 1px;
+    margin-bottom: .25rem;
+  }
+</style>
+
+<div id="UpcomingInvites"  class="ui fluid card">
+  <div class="content">
+    <div class="header mainHeader">
+      Running
+      <span style="float: right">Dec 12 @ 9pm</span>
+    </div>
   </div>
   <div class="content">
-   <%= render 'invites/response_list' %>
+    <div class="ui sub header"><i class="user icon"></i> Israel Madueme</div>
+    <div class="ui sub header location"><i class="world icon"></i> Schenely Park</div>
+    <p><i class="info icon"></i> This is the details of the event. It gives more details about the event</p>
+
+    <%= render 'invites/response_list' %>
   </div>
 </div>
-
-<script type="text/javascript">
-  $('.ui.accordion').accordion();
-</script>
 
 

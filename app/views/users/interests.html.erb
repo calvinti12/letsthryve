@@ -1,12 +1,13 @@
 <%= render 'users/profile_tabs' %>
 
 <style type="text/css">
-  #interestCards .myInterests {
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding-bottom: 0.5em;
-    margin-bottom: 0.75rem;
-    border-bottom: 1px solid #d3d3d3;
+  #InterestList {
+    width: 90%;
+    margin: auto;
+  }
+
+  #InterestList > p{
+    margin-top: .75rem;
   }
 
   #webview-content .activity {
@@ -22,6 +23,29 @@
     margin-bottom: 0.25rem;
   }
 </style>
+
+<div id="InterestList" class="ui raised segment">
+  <a class="ui red ribbon label">Exercising</a>
+  <p>
+    <span class="ui label">Running</span>
+    <span class="ui label">Swimming</span>
+    <span class="ui label">Hiking</span>
+  </p>
+  <a class="ui teal left ribbon label">Hanging Out</a>
+  <p>
+    <span class="ui label">Eating</span>
+    <span class="ui label">Studying</span>
+    <span class="ui label">Movies</span>
+  </p>
+  <a class="ui blue left ribbon label">Campus Events</a>
+  <p>
+    <span class="ui label">Therapets</span>
+    <span class="ui label">Fitness-X</span>
+    <span class="ui label">TedxCMU</span>
+  </p>
+
+  <button class="ui lightgrey fluid button">Edit</button>
+</div>
 
 <div id="webview-content">
   <div class="infoContainer">
@@ -75,47 +99,10 @@
       Your friends can invite you to any activity, but, this lets them
       know what you <strong>really</strong> love to do!
     </p>
-    <button class="positive ui button" style="width: 100%">Done</button>
+    <button class="ui positive fluid button">Done</button>
   </div>
 </div>
 
-  
-<div id ="interestCards">
-  <div class="myInterests">
-    <p>My Interests</p>
-  </div>
-  <div class="ui one column grid">
-    <div class="column">
-      <div class="ui raised segment">
-        <a class="ui red ribbon label">Exercise</a>
-        <ul>
-          <a class="ui basic label">Running</a>
-          <a class="ui basic label">Swimming</a>
-          <a class="ui basic label">Hiking</a>   
-        </ul>
-      </div>
-    </div>
-    <div class="column">
-      <div class="ui segment">
-        <a class="ui teal left ribbon label">Hangout</a>
-        <ul>
-          <a class="ui basic label">Eating</a>
-          <a class="ui basic label">Studying</a>
-          <a class="ui basic label">Movies</a>    
-      </div>
-    </div>
-    <div class="column">
-      <div class="ui segment">
-        <a class="ui blue left ribbon label">Campus Events</a>
-        <ul>
-          <a class="ui basic label">Therapets</a> 
-          <a class="ui basic label">Fitness-X</a> 
-          <a class="ui basic label">TedxCMU</a>      
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script type="text/javascript">
   $('select.dropdown').dropdown();

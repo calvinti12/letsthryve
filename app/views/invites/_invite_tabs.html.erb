@@ -1,38 +1,18 @@
 <style>
-  #UserProfileImage .smallPaddedColumn {
-    padding: 14px 7px 7px 7px;
+  #InviteMenu > .item {
+    min-width: 50%;
   }
 
-  #UserProfileImage .image {
-    width: 3rem;
+  #InviteMenu > .item > span {
     margin: auto;
-  }
-
-  #UserProfileImage .text {
-    font-weight: bold;
-    font-size: 1.2em;
-  }
-
-  #InviteMenu .item {
-    text-align: center;
-    padding-left: 33px;
-    padding-right: 13px;
-    min-width: 33.3%;
-
   }
 </style>
 
-<div id="UserProfileImage" class="ui grid">
-  <div class="six wide column smallPaddedColumn">
-    <img src="/assets/israel.png"
-         class="ui medium circular image" />
-  </div>
-  <div class="ten wide column" style="padding-top: 25px">
-    <span class="text">Israel Madueme</span>
-  </div>
-</div>
 <div id="InviteMenu" class="ui blue secondary pointing menu">
-  <%= link_to 'Create', new_invite_path(@user), class: 'active item' %>
-  <%= link_to 'Upcoming', upcoming_invites_path(@user), class: 'item' %>
-  <%= link_to 'Past', 'google.com', class: 'item' %>
+  <a href="<%= new_invite_path(@user) %>" class="active item">
+    <span>Create an Invite</span>
+  </a>
+  <a href="<%= upcoming_invites_path(@user) %>" class="item">
+    <span>See Upcoming</span>
+  </a>
 </div>
