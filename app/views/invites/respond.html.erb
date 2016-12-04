@@ -31,31 +31,38 @@
   </div>
   <div class="content">
     <div class="ui sub header"><i class="user icon"></i> Israel Madueme</div>
-    <div class="ui sub header location"><i class="world icon"></i> Schenely Park</div>
+    <div class="ui sub header location"><i class="marker icon"></i> Schenely Park</div>
     <p><i class="info icon"></i> This is the details of the event. It gives more details about the event</p>
 
     <%= render 'invites/response_list' %>
     <br />
     <div class="responseButtons">
       <a class="ui positive button">Accept</a>
-      <a class="ui negative button">Decline</a>
+      <a class="ui lightgrey button">Decline</a>
     </div>
   </div>
 </div>
 
 <!-- if no fb_messenger_id -->
-<p style="color: grey; margin-top: .75rem">
-  <i class="grey help circle icon"></i>
-  Let's Thryve is a Messenger bot that helps you find friends to exercise and hangout with.
-  Click 'Send to Messenger' below to start using the bot!
-</p>
-<div class="ui right aligned container fb-send-to-messenger"
-  style="margin-right: 0 !important;"
-  messenger_app_id="<%= ENV['FB_APP_ID'] %>"
-  page_id="<%= ENV['FB_PAGE_ID'] %>"
-  data-ref="MessagedUs"
-  color="white"
-  size="large">
+<div id="LearnAboutUs" class="ui accordion">
+  <div class="title">
+   <i class="dropdown icon"></i> What's Let's Thryve?
+  </div>
+
+  <div class="content">
+    <p style="color: grey;">
+      Let's Thryve is a Messenger bot that helps you find friends to exercise and hangout with.
+      Click 'Send to Messenger' below to start using the bot!
+    </p>
+    <div class="ui right aligned container fb-send-to-messenger"
+      style="margin-right: 0 !important;"
+      messenger_app_id="<%= ENV['FB_APP_ID'] %>"
+      page_id="<%= ENV['FB_PAGE_ID'] %>"
+      data-ref="MessagedUs"
+      color="white"
+      size="large">
+    </div>
+  </div>
 </div>
 
 <script>
@@ -76,4 +83,5 @@
      fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
+    $('#LearnAboutUs').accordion();
 </script>
