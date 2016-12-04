@@ -32,6 +32,10 @@ class GetStartedReceiver < AbstractReceiver
                         url: "/users/#{@user.id}/interests", # TODO with_fb_login redirect
                         webview_size: 'full',
                         use_extensions: true)
+        .add_url_button(title: 'What\'s Happening',
+                        url: "/invites/1/respond", # TODO with_fb_login redirect
+                        webview_size: 'tall',
+                        use_extensions: false)
         .deliver!
     end
   end
