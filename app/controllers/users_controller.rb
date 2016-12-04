@@ -36,6 +36,14 @@ class UsersController < ApplicationController
 
   end
 
+  def edit_interests
+    
+  end
+
+  def set_interests
+
+  end
+
   private
 
   def load_user

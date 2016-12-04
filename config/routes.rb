@@ -19,4 +19,8 @@ Rails.application.routes.draw do
   get '/users/:user_id/invites/new', to: 'invites#new', as: :new_invite
   get '/users/:user_id/invites/upcoming', to: 'invites#upcoming', as: :upcoming_invites
   get '/invites/:id/respond', to: 'invites#respond', as: :respond_invite
+
+  # Jeanine routes
+  get '/users/:user_id/edit_interests', to: 'users#edit_interests', as: :edit_interests
+  post '/users/:user_id/set_interests', to: 'users#set_interests', as: :set_interests
 end
