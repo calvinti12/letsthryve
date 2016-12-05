@@ -31,11 +31,11 @@ class GetStartedReceiver < AbstractReceiver
         .set_message(:see_whats_happening)
         .add_url_button(title: 'What\'s Happening',
                         url: with_fb_login('/newsfeed', {current_user: @user.id}),
-                        webview_size: 'tall',
+                        webview_size: 'full',
                         use_extensions: true)
         .add_url_button(title: 'New Invite',
                         url: with_fb_login('/invites/new', {current_user: @user.id}),
-                        webview_size: 'tall',
+                        webview_size: 'full',
                         use_extensions: true)
         .deliver!
 

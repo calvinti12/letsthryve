@@ -28,6 +28,7 @@
   }
 </style>
 
+<% unless @edit_mode %>
 <div id="AvailabilityList">
   <div class="ui segment">
     <div class="ui equal width center aligned grid">
@@ -40,15 +41,15 @@
     </div>
   </div>
 
-  <button class="ui lightgrey fluid button">Edit</button>
+  <%= link_to 'Edit', edit_availability_path, class: 'ui lightgrey fluid button' %>
 </div>
-
+<% else %>
 <div id="webview-content">
   <div class="infoContainer">
     <p style="font-size: 1.1rem">When are the top 5 times that you're free?</p>
   </div>
 
-  <form method="GET" action="/users/login_success" class="ui form">
+  <form method="post" action="/set_availability" class="ui form">
     <div class="mainContainer">
       <div class="ui grid">
         <% 5.times do %>
@@ -87,3 +88,4 @@
   $('select.dropdown').dropdown();
   $('.selection.dropdown').attr('style', 'min-width: 10.5rem');
 </script>
+<% end %>

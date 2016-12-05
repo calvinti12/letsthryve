@@ -61,7 +61,7 @@
     </div>
     <div class="ui grey message">Completed this goal on Jan 1 2017!</div>
 
-    <form method="GET" action="/users/login_success">
+    <form method="post" action="/goals/1/encourage">
       <div class="ui fluid action input">
         <input name="message" type="text" placeholder="Encourage Israel!">
         <button type="submit" class="ui green button">Encourage</button>
@@ -74,7 +74,7 @@
   <div class="info">
     Create a New Goal
   </div>
-  <form method="GET" action="/users/login_success" class="ui form">
+  <form method="post" action="/new_goal" class="ui form">
     <div class="field">
       <textarea name="goalText" placeholder="What's your goal?" rows="2"></textarea>
     </div>

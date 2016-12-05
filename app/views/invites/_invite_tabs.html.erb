@@ -16,3 +16,21 @@
     <span>Your Invites</span>
   </a>
 </div>
+<% if flash[:notice] %>
+  <div class="ui message green" style="text-align: center">
+    <i class="close icon"></i>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if flash[:error] %>
+  <div class="ui message red" style="text-align: center">
+    <i class="close icon"></i>
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<script>
+  $('.message .close').on('click', function() {
+    $(this).closest('.message').transition('fade');
+  });
+</script>

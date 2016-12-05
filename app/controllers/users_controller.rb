@@ -12,54 +12,85 @@ class UsersController < ApplicationController
 
   def newsfeed
     load_fb_user('/newsfeed')
+    @show_all = true if params[:show_all]
   end
 
   def friends
-
+    @friends = @current_user.friends.order(:full_name)
   end
 
   def activity
-
+    @activity = Activity.for_user(@user).chronological
   end
 
   def goals
-
+    @goals = Goal.for_user(@user).by_state.chronological
   end
 
   def new_goal
-
+    Goal.create({user: @current_user, text: params[:goalText], state: 3})
+    redirect_to user_goals_url(@current_user)
   end
 
   def encourage
-
+    GoalEncouragement.create({user: @current_user, goal: params[:goal_id], text: params[:message]})
+    redirect_to :back
   end
 
   def log_goal
-
+    goal = Goal.find(params[:goal_id])
+    goal.update_attributes(state: params[:state].to_i)
   end
 
   def availability
-
+    @edit_mode = false;
   end
 
   def edit_availability
-
+    @edit_mode = true
+    render 'availability'
   end
 
   def set_availability
-
+    availability = []
+    (0...5).each do |i|
+      availability.append({day: params[:free_day][i], time: params[:free_time][i]})
+    end
+    if params[:free_day].include?('') || params[:free_time].include?('')
+      flash[:error] = 'Please set the top 5 times you\'re free'
+      @edit_mode = true
+      render 'availability'
+    else
+      @current_user.update_attributes(availability: availability.to_json)
+      flash[:notice] = 'Your availability was saved'
+      redirect_to user_availability_url(@current_user)
+    end
   end
 
   def interests
-
+    @edit_mode = false
   end
 
   def edit_interests
-    
+    @edit_mode = true
+    render 'interests'
   end
 
   def set_interests
-
+    interests = {
+      exercises: params[:exercises],
+      hangouts: params[:hangouts],
+      oncampus: params[:oncampus]
+    }.to_json
+    unless params[:exercises] && params[:hangouts] && params[:hangouts]
+      flash[:error] = "Select at least one interest in each category."
+      @edit_mode = true
+      render 'interests'
+    else
+      @current_user.update_attributes(interests: interests)
+      flash[:notice] = 'Your interests were saved'
+      redirect_to user_interests_url(@current_user)
+    end
   end
 
   private

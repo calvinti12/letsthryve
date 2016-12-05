@@ -7,7 +7,7 @@ class Goal < ApplicationRecord
 
 	# Scopes
 	scope :for_user, -> (user) { where(user: user) }
-	scope :by_complete, -> { order('state DESC') }
+	scope :by_state, -> { order('state DESC') }
 	scope :chronological, -> { order('created_at DESC') }
 
 	# Methods
