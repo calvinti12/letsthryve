@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include ActionView::Helpers::TextHelper
   # protect_from_forgery with: :exception
 
   protected
@@ -22,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def dev_mode?
     if Rails.env.development?
-      @current_user = User.first
+      @current_user = User.find(2)
       @invite = Invitation.first
       return true
     end

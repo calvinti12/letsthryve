@@ -4,7 +4,7 @@ class InvitationResponse < ApplicationRecord
   belongs_to :invitation
   belongs_to :user
 
-  scope :alphabetical, ->{ joins(:users).order('user.full_name') }
+  scope :alphabetical, ->{ joins(:user).order('users.full_name') }
 
 end
 

@@ -30,18 +30,28 @@
 
 <% unless @edit_mode %>
 <div id="AvailabilityList">
-  <div class="ui segment">
-    <div class="ui equal width center aligned grid">
-      <div class="centered column green">
-        <span class="detail-day">Wednesday</span>
-      </div>
-      <div class="centered column">
-        <span class="detail-time">5 AM</span>
+  <% if @availability.empty? %>
+    <div style="text-align: center" class="ui grey message">
+      No availability has been set! Come on!
+    </div>
+  <% end %>
+
+  <% @availability.each do |a| %>
+    <div class="ui segment">
+      <div class="ui equal width center aligned grid">
+        <div class="centered column green">
+          <span class="detail-day"><%= a[:day] %></span>
+        </div>
+        <div class="centered column">
+          <span class="detail-time"><%= a[:time] %></span>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 
-  <%= link_to 'Edit', edit_availability_path, class: 'ui lightgrey fluid button' %>
+  <% if @user == @current_user %>
+    <%= link_to 'Edit', edit_availability_path, class: 'ui lightgrey fluid button' %>
+  <% end %>
 </div>
 <% else %>
 <div id="webview-content">

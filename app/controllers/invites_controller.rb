@@ -7,7 +7,7 @@ class InvitesController < ApplicationController
   end
 
   def upcoming
-
+    @invites = @current_user.invitations.chronological
   end
 
   def respond

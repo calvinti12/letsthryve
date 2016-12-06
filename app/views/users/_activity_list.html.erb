@@ -8,12 +8,15 @@
 
 
 <div id="ActivityList">
-  <% 3.times do %>
+  <% unless @activities.present? %>
+    <div style="text-align: center" class="ui lightgrey message">There are no activities yet! <br />Go Thryve together!</div>
+  <% end %>
+  <% @activities.each do |activity| %>
     <div class="entry">
-      <img class="ui avatar image" src="/assets/israel.png" style="margin-top: 5px">
+      <img class="ui avatar image" src="<%= activity.picture_url_override || activity.user.picture_url %>" style="margin-top: 5px">
       <p>
-        Israel went running with Jeanine and Ashley!<br />
-        <span style="color: grey">On 12/2/2016 near Schenely Park</span>
+        <%= activity.text %><br />
+        <span style="color: grey"><%= activity.time %>. <%= activity.location %></span>
       </p>
     </div>
   <% end %>

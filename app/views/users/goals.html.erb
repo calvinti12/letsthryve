@@ -28,64 +28,75 @@
     text-align: center;
   }
 </style>
-
-<div id="GoalList">
-  <div class="ui segment goal">
-    <a class="ui ribbon label">Goal started Dec 3, 2016</a>
-    <div class="description">I want to be able to run a marathon by the end of the year and place above 50.</div>
-    <div class="ui styled fluid accordion">
-      <div class="title">
-        <i class="dropdown icon"></i>
-        <span class="encouragedCount">55 people have encouraged you!</span>
-      </div>
-      <div class="content">
-        <p>
-          <img class="ui avatar image" src="/assets/israel.png" />
-          <span>You can do it! Keep going!</span>
-        </p>
-        <p>
-          <img class="ui avatar image" src="/assets/Christabelle.jpg" />
-          <span>You can do it! Keep going! The sky is the limit man!!</span>
-        </p>
-        <p>
-          <img class="ui avatar image" src="/assets/fish.png" />
-          <span>I believe in you! You can totally do this bro!</span>
-        </p>
-      </div>
+<% if @user.id == @current_user.id %>
+  <div id="NewGoal" class="ui segment">
+    <div class="info">
+      Create a New Goal
     </div>
-    <div style="margin-top: .75rem"></div>
-    <div class="goalButtons">
-      <%= link_to 'Did it!', user_goals_path(@user), class: 'ui green button' %>
-      <%= link_to 'Tried', user_goals_path(@user), class: 'ui lightgrey button' %>
-      <%= link_to 'Didn\'t', user_goals_path(@user), class: 'ui red button' %>
-    </div>
-    <div class="ui grey message">Completed this goal on Jan 1 2017!</div>
-
-    <form method="post" action="/goals/1/encourage">
-      <div class="ui fluid action input">
-        <input name="message" type="text" placeholder="Encourage Israel!">
-        <button type="submit" class="ui green button">Encourage</button>
+    <form method="post" action="/new_goal" class="ui form">
+      <div class="field">
+        <textarea name="goalText" placeholder="What's your goal?" rows="2"></textarea>
       </div>
+      <p style="color: grey;">
+        <i class="grey info circle icon"></i>
+        Your friends will be able to see your goals and encourage you!
+        Don't let them down!
+      </p>
+      <input type="submit" value="Done" class="ui positive fluid button" />
     </form>
   </div>
+<% end %>
+<div id="GoalList">
+  <% unless @goals.present? %>
+    <div style="text-align: center" class="ui grey message">
+      There are no goals set?! Come on, thryve!
+    </div>
+  <% end %>
+  <% @goals.each do |goal| %>
+    <div class="ui segment goal">
+      <a class="ui ribbon label">Goal started <%= goal.created_at.strftime('%b %e, %Y') %></a>
+      <div class="description"><%= goal.text %></div>
+
+      <% unless goal.goal_encouragements.count == 0 %>
+        <div class="ui styled fluid accordion">
+          <div class="title">
+            <i class="dropdown icon"></i>
+            <span class="encouragedCount"><%= pluralize(goal.goal_encouragements.count, 'person') %> <%= goal.goal_encouragements.count == 1 ? 'has' : 'have' %> encouraged <%= (@user == @current_user) ? 'you' : @user.first_name %></span>
+          </div>
+          <div class="content">
+            <% goal.goal_encouragements.each do |e| %>
+              <p>
+                <img class="ui avatar image" src="<%= e.user.picture_url %>" />
+                <span><%= e.text %></span>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <div style="margin-top: .75rem"></div>
+
+      <% if @user == @current_user && goal.state == 3 %>
+      <div class="goalButtons">
+        <%= link_to 'Did it!', log_goal_path(goal, state: 2), class: 'ui green button' %>
+        <%= link_to 'Tried', log_goal_path(goal, state: 1), class: 'ui lightgrey button' %>
+        <%= link_to 'Didn\'t', log_goal_path(goal, state: 0), class: 'ui red button' %>
+      </div>
+      <% elsif goal.state == 3 %>
+        <form method="post" action="<%= encourage_path(goal) %>">
+          <div class="ui fluid action input">
+            <input name="message" type="text" placeholder="Encourage <%= @user.first_name %>!">
+            <button type="submit" class="ui green button">Encourage</button>
+          </div>
+        </form>
+      <% else %>
+        <div class="ui <%= ['red', 'grey', 'green'][goal.state] %> message"><%= @user.first_name %> <%= Goal::GOAL_ACTIONS[goal.state] %> - <%= goal.updated_at.strftime('%b %e') %></div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
-<div id="NewGoal" class="ui segment">
-  <div class="info">
-    Create a New Goal
-  </div>
-  <form method="post" action="/new_goal" class="ui form">
-    <div class="field">
-      <textarea name="goalText" placeholder="What's your goal?" rows="2"></textarea>
-    </div>
-    <p style="color: grey;">
-      <i class="grey info circle icon"></i>
-      Your friends will be able to see your goals and encourage you!
-      Don't let them down!
-    </p>
-    <input type="submit" value="Done" class="ui positive fluid button" />
-  </form>
-</div>
+
 
 <script>
   $('select.dropdown').dropdown();

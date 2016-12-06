@@ -9,10 +9,10 @@
 </style>
 
 <div id="NewsfeedMenu" class="ui blue secondary pointing menu">
-  <a href="<%= user_newsfeed_path %>" class="active item">
+  <a href="<%= user_newsfeed_path %>" class="item <%= 'active' unless @show_all %>">
     <span>Just Friends</span>
   </a>
-  <a href="<%= user_newsfeed_path(show_all: true) %>" class="item">
+  <a href="<%= user_newsfeed_path(show_all: true) %>" class="item <%= 'active' if @show_all %>">
     <span>All Campus</span>
   </a>
 </div>

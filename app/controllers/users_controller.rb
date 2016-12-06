@@ -13,6 +13,11 @@ class UsersController < ApplicationController
   def newsfeed
     load_fb_user('/newsfeed')
     @show_all = true if params[:show_all]
+    if @show_all
+      @activities = Activity.except_user(@current_user).chronological
+    else
+      @activities = Activity.for_user_friends(@current_user).chronological
+    end
   end
 
   def friends
@@ -20,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def activity
-    @activity = Activity.for_user(@user).chronological
+    @activities = Activity.for_user(@user).chronological
   end
 
   def goals
@@ -30,7 +35,7 @@ class UsersController < ApplicationController
   def new_goal
     Goal.create({user: @current_user, text: params[:goalText], state: 3})
     Activity.create({user: @current_user,
-                     text: "#{@current_user.first_name} made a goal!: #{truncate(params[:goalText], length: 20, separator: ' ')}!",
+                     text: "#{@current_user.first_name} made a goal: #{truncate(params[:goalText], length: 70, separator: ' ')}",
                      time: now_string})
     redirect_to user_goals_url(@current_user)
   end
@@ -38,8 +43,8 @@ class UsersController < ApplicationController
   def encourage
     @goal = Goal.find(params[:goal_id])
     GoalEncouragement.create({user: @current_user, goal: @goal, text: params[:message]})
-    Activity.create({user: @current_user,
-                     text: "#{@current_user.first_name} encouraged #{@goal.user.first_name}!",
+    Activity.create({user: @goal.user, picture_url_override: @current_user.picture_url,
+                     text: "#{@current_user.first_name} encouraged #{@goal.user.first_name}: #{truncate(params[:message], length: 70, separator: ' ')}",
                      time: now_string})
     redirect_to :back
   end
@@ -49,12 +54,26 @@ class UsersController < ApplicationController
     goal.update_attributes(state: params[:state].to_i)
     action = ['didn\'t achieve their goal', 'tried to achieve their goal', 'achieved their goal!']
     Activity.create({user: @current_user,
-                     text: "#{@current_user.first_name} #{action[params[:state]]}: #{truncate(params[:goalText], length: 20, separator: ' ')}",
+                     text: "#{@current_user.first_name} #{action[params[:state].to_i]}: #{truncate(goal.text, length: 70, separator: ' ')}",
                      time: now_string})
+
+    if params[:state].to_i == 0
+      flash[:notice] = 'Logged! Better luck next time!'
+    elsif params[:state].to_i == 1
+      flash[:notice] = 'Logged! Good try, but, stick to it next time!'
+    elsif params[:state].to_i == 2
+      flash[:notice] = 'Logged! Nice job, keep it up!'
+    end
+    redirect_to user_goals_path(@current_user)
   end
 
   def availability
-    @edit_mode = false;
+    @edit_mode = false
+    if @user.availability.present?
+      @availability = JSON.parse(@user.availability).map(&:symbolize_keys)
+    else
+      @availability = []
+    end
   end
 
   def edit_availability
@@ -81,6 +100,11 @@ class UsersController < ApplicationController
 
   def interests
     @edit_mode = false
+    if @user.interests.present?
+      @interests = JSON.parse(@user.interests).symbolize_keys
+    else
+      @interests = {exercises: ['None selected'], hangouts: ['None selected'], oncampus: ['None selected']}
+    end
   end
 
   def edit_interests
@@ -113,6 +137,6 @@ class UsersController < ApplicationController
   end
 
   def now_string
-    DateTime.now.strftime('%b %e, %Y')
+    DateTime.now.strftime('On %b %e, %Y')
   end
 end

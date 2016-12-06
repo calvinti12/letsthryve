@@ -1,9 +1,11 @@
 class Goal < ApplicationRecord
   
 	GOAL_STATES = ['Failed', 'Tried', 'Complete', 'Not Complete']
+  GOAL_ACTIONS = ['didn\'t achieve their goal', 'tried to achieve their goal', 'achieved their goal!']
 
 	# Relationships
 	belongs_to :user
+	has_many :goal_encouragements
 
 	# Scopes
 	scope :for_user, -> (user) { where(user: user) }

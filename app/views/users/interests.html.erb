@@ -28,24 +28,26 @@
 <div id="InterestList" class="ui raised segment">
   <a class="ui red ribbon label">Exercising</a>
   <p>
-    <span class="ui label">Running</span>
-    <span class="ui label">Swimming</span>
-    <span class="ui label">Hiking</span>
+    <% @interests[:exercises].each do |interest| %>
+      <span class="ui label"><%= interest %></span>
+    <% end %>
   </p>
   <a class="ui teal left ribbon label">Hanging Out</a>
   <p>
-    <span class="ui label">Eating</span>
-    <span class="ui label">Studying</span>
-    <span class="ui label">Movies</span>
+    <% @interests[:hangouts].each do |interest| %>
+      <span class="ui label"><%= interest %></span>
+    <% end %>
   </p>
   <a class="ui blue left ribbon label">Campus Events</a>
   <p>
-    <span class="ui label">Therapets</span>
-    <span class="ui label">Fitness-X</span>
-    <span class="ui label">TedxCMU</span>
+    <% @interests[:oncampus].each do |interest| %>
+      <span class="ui label"><%= interest %></span>
+    <% end %>
   </p>
 
-  <%= link_to 'Edit', edit_interests_path, class: 'ui lightgrey fluid button' %>
+  <% if @user == @current_user %>
+    <%= link_to 'Edit', edit_interests_path, class: 'ui lightgrey fluid button' %>
+  <% end %>
 </div>
 <% else %>
 <div id="webview-content">

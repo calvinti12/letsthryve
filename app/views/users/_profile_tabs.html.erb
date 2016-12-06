@@ -19,20 +19,21 @@
   }
 </style>
 
+<% user = @user || @current_user %>
 <div id="UserProfileImage" class="ui grid">
   <div class="six wide column smallPaddedColumn">
-    <img src="/assets/israel.png"
+    <img src="<%= user.picture_url %>"
          class="ui medium circular image" />
   </div>
   <div class="ten wide column" style="padding-top: 25px">
-    <span class="text">Israel Madueme</span>
+    <span class="text"><%= user.full_name %></span>
   </div>
 </div>
 <div id="ProfileMenu" class="ui blue secondary pointing menu">
-  <%= link_to 'Activity', user_activity_path(@user || @current_user), class: 'active item' %>
-  <%= link_to 'Goals', user_goals_path(@user || @current_user), class: 'item' %>
-  <%= link_to 'Interests', user_interests_path(@user || @current_user), class: 'item' %>
-  <%= link_to 'Availability', user_availability_path(@user || @current_user), class: 'item' %>
+  <%= link_to 'Activity', user_activity_path(user), class: "item #{'active' if current_page?(user_activity_path(user))}" %>
+  <%= link_to 'Goals', user_goals_path(user), class: "item #{'active' if current_page?(user_goals_path(user))}" %>
+  <%= link_to 'Interests', user_interests_path(user), class: "item #{'active' if current_page?(user_interests_path(user))}" %>
+  <%= link_to 'Availability', user_availability_path(user), class: "item #{'active' if current_page?(user_availability_path(user))}" %>
 </div>
 <% if flash[:notice] %>
   <div class="ui message green" style="text-align: center">

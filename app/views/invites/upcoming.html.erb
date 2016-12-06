@@ -15,20 +15,27 @@
   }
 </style>
 
-<div id="UpcomingInvites"  class="ui fluid card">
-  <div class="content">
-    <div class="header mainHeader">
-      Running
-      <span style="float: right">Dec 12 @ 9pm</span>
+<% unless @invites.present? %>
+  <div style="text-align: center" class="ui grey message">
+    There are no invitations to show yet! Maybe you should invite someone :)
+  </div>
+<% end %>
+<% @invites.each do |invite| %>
+  <div id="UpcomingInvites"  class="ui fluid card">
+    <div class="content">
+      <div class="header mainHeader">
+        <%= invite.what %>
+        <span style="float: right"><%= invite.when %></span>
+      </div>
+    </div>
+    <div class="content">
+      <div class="ui sub header"><i class="user icon"></i> <%= invite.user.full_name %></div>
+      <div class="ui sub header location"><i class="marker icon"></i> <%= invite.where %></div>
+      <p><i class="info icon"></i> <%= invite.details %></p>
+
+      <%= render 'invites/response_list', {guestlist: invite.invitation_responses.alphabetical} %>
     </div>
   </div>
-  <div class="content">
-    <div class="ui sub header"><i class="user icon"></i> Israel Madueme</div>
-    <div class="ui sub header location"><i class="marker icon"></i> Schenely Park</div>
-    <p><i class="info icon"></i> This is the details of the event. It gives more details about the event</p>
-
-    <%= render 'invites/response_list' %>
-  </div>
-</div>
+<% end %>
 
 

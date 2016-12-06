@@ -9,10 +9,10 @@
 </style>
 
 <div id="InviteMenu" class="ui blue secondary pointing menu">
-  <a href="<%= new_invite_path %>" class="active item">
+  <a href="<%= new_invite_path %>" class="item <%= 'active' if current_page?(new_invite_path) %>">
     <span>Create an Invite</span>
   </a>
-  <a href="<%= upcoming_invites_path %>" class="item">
+  <a href="<%= upcoming_invites_path %>" class="item <%= 'active' if current_page?(upcoming_invites_path) %>">
     <span>Your Invites</span>
   </a>
 </div>

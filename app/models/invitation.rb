@@ -1,6 +1,7 @@
 class Invitation < ApplicationRecord
   # Relationships
   belongs_to :user
+  has_many :invitation_responses
 
   # Scopes
   scope :chronological, ->{ order('created_at DESC') }

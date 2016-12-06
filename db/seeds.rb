@@ -33,13 +33,13 @@ jeanine = {
 # Create users
 israel = User.create israel
 ashely = User.create ashely
-jeanine = user.create jeanine
+jeanine = User.create jeanine
 
 # Create friendships
-Friendship.create({user_id: israel.id, friend: jeanine.id})
-Friendship.create({user_id: israel.id, friend: ashely.id})
-Friendship.create({user_id: ashely.id, friend: israel.id})
-Friendship.create({user_id: ashely.id, friend: jeanine.id})
-Friendship.create({user_id: jeanine.id, friend: israel.id})
-Friendship.create({user_id: jeanine.id, friend: ashely.id})
+Friendship.create({user_id: israel.id, friend_id: jeanine.id})
+Friendship.create({user_id: israel.id, friend_id: ashely.id})
+Friendship.create({user_id: ashely.id, friend_id: israel.id})
+Friendship.create({user_id: ashely.id, friend_id: jeanine.id})
+Friendship.create({user_id: jeanine.id, friend_id: israel.id})
+Friendship.create({user_id: jeanine.id, friend_id: ashely.id})
 

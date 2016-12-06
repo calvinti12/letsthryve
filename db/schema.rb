@@ -14,11 +14,12 @@ ActiveRecord::Schema.define(version: 20161204184233) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "picture_url_override"
     t.string   "text"
     t.string   "time"
     t.string   "location"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "friendships", force: :cascade do |t|
