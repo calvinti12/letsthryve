@@ -21,7 +21,7 @@ class InvitesController < ApplicationController
 
   def accept
     @invite = Invitation.find(params[:id])
-    response = InvitationResponse.where(user: @current_user, invitation: @invite).first
+    response = @invite.invitation_responses.where(user: @current_user).first
     response.response = 'accepted'
     response.save!
     Activity.create({user: @current_user,
