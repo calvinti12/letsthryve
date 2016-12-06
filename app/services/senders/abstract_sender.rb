@@ -61,9 +61,9 @@ class AbstractSender
     RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['FB_PAGE_ACCESS_TOKEN']}",
                     request, content_type: :json
   rescue => e
-    Rails.logger("\n\n=======================================RESTCLIENT")
-    Rails.logger(e.response)
-    Rails.logger("=============================+END")
+    Rails.logger.error("\n\n=======================================RESTCLIENT")
+    Rails.logger.error(e.response)
+    Rails.logger.error("=============================+END")
   end
 
 end
