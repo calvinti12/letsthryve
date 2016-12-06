@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   # Invites
   get '/invites/new', to: 'invites#new', as: :new_invite
-  post '/invites/create', to: 'invites#create_invite', as: :create_invite
+  post '/invites/create', to: 'invites#create', as: :create_invite
   get '/invites/upcoming', to: 'invites#upcoming', as: :upcoming_invites
   get '/invites/respond', to: 'invites#respond', as: :respond_invite
   post '/invites/:id/accept', to: 'invites#accept', as: :accept_invite

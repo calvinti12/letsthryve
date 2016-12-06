@@ -94,6 +94,7 @@
         '<div class="ui green horizontal label">Accepted</div>' +
       '</div>';
 
+    $.post("/invites/1/accept");
     $('#InviteResponsesList').prepend(thryveListItem);
     $('.green.message').show();
     $('.responseButtons').hide();
@@ -106,6 +107,7 @@
         '<div class="ui lightgrey horizontal label">Declined</div>' +
       '</div>';
 
+    $.post("/invites/1/decline");
     $('#InviteResponsesList').prepend(thryveListItem);
     $('.lightgrey.message').show();
     $('.responseButtons').hide();

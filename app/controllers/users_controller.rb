@@ -29,17 +29,28 @@ class UsersController < ApplicationController
 
   def new_goal
     Goal.create({user: @current_user, text: params[:goalText], state: 3})
+    Activity.create({user: @current_user,
+                     text: "#{@current_user.first_name} made a goal!: #{truncate(params[:goalText], length: 20, separator: ' ')}!",
+                     time: now_string})
     redirect_to user_goals_url(@current_user)
   end
 
   def encourage
-    GoalEncouragement.create({user: @current_user, goal: params[:goal_id], text: params[:message]})
+    @goal = Goal.find(params[:goal_id])
+    GoalEncouragement.create({user: @current_user, goal: @goal, text: params[:message]})
+    Activity.create({user: @current_user,
+                     text: "#{@current_user.first_name} encouraged #{@goal.user.first_name}!",
+                     time: now_string})
     redirect_to :back
   end
 
   def log_goal
     goal = Goal.find(params[:goal_id])
     goal.update_attributes(state: params[:state].to_i)
+    action = ['didn\'t achieve their goal', 'tried to achieve their goal', 'achieved their goal!']
+    Activity.create({user: @current_user,
+                     text: "#{@current_user.first_name} #{action[params[:state]]}: #{truncate(params[:goalText], length: 20, separator: ' ')}",
+                     time: now_string})
   end
 
   def availability
@@ -56,6 +67,7 @@ class UsersController < ApplicationController
     (0...5).each do |i|
       availability.append({day: params[:free_day][i], time: params[:free_time][i]})
     end
+
     if params[:free_day].include?('') || params[:free_time].include?('')
       flash[:error] = 'Please set the top 5 times you\'re free'
       @edit_mode = true
@@ -82,7 +94,8 @@ class UsersController < ApplicationController
       hangouts: params[:hangouts],
       oncampus: params[:oncampus]
     }.to_json
-    unless params[:exercises] && params[:hangouts] && params[:hangouts]
+
+    unless params[:exercises] && params[:hangouts] && params[:oncampus]
       flash[:error] = "Select at least one interest in each category."
       @edit_mode = true
       render 'interests'
@@ -99,4 +112,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
+  def now_string
+    DateTime.now.strftime('%b %e, %Y')
+  end
 end

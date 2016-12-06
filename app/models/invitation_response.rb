@@ -1,4 +1,5 @@
 class InvitationResponse < ApplicationRecord
+  RESPONSES = ['seen', 'accepted', 'declined']
 
   belongs_to :invitation
   belongs_to :user

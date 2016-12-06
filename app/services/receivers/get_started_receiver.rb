@@ -12,7 +12,7 @@ class GetStartedReceiver < AbstractReceiver
         .new(@user)
         .set_message(:introduction_part_2)
         .add_url_button(title: 'Ok',
-                        url: with_fb_login('/login_success', {current_user: @user.id}),
+                        url: with_fb_login('/login_success', {m_id: @user.fb_messenger_id}),
                         webview_size: 'tall',
                         use_extensions: true)
         .deliver!
@@ -30,11 +30,11 @@ class GetStartedReceiver < AbstractReceiver
         .new(@user)
         .set_message(:see_whats_happening)
         .add_url_button(title: 'What\'s Happening',
-                        url: with_fb_login('/newsfeed', {current_user: @user.id}),
+                        url: with_fb_login('/newsfeed', {m_id: @user.fb_messenger_id}),
                         webview_size: 'full',
                         use_extensions: true)
         .add_url_button(title: 'New Invite',
-                        url: with_fb_login('/invites/new', {current_user: @user.id}),
+                        url: with_fb_login('/invites/new', {m_id: @user.fb_messenger_id}),
                         webview_size: 'full',
                         use_extensions: true)
         .deliver!

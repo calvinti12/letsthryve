@@ -15,7 +15,8 @@ class FormFieldData
   ].sort.append('Other Hangout Activity')
 
   ONCAMPUS = [
-    'Therapets', 'Mindfulness Room', 'Group X', 'TedxCMU'
+    'Movies in McConomy', 'Paws to Relax', 'School of Drama Plays',
+    'Mindfulness Room', 'Group X', 'TedxCMU'
   ].sort.append('Other Campus Event')
 
   ACTIVITIES = EXERCISE + HANGOUT + ONCAMPUS

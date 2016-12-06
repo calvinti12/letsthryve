@@ -1,24 +1,22 @@
 class FacebookProfileService
 
-  def initialize(user, code, origin_request_route)
-    @user = user
+  def initialize(code, origin_request_route, messenger_id=nil)
+    @messenger_id = messenger_id
     @access_token = generate_access_token(code, origin_request_route)
   end
 
   def update_profile
     profile_data = get_profile
 
-    if @user.nil?
-      @user = User.where(fb_profile_id: profile_data[:id]).first
-      @user = User.create if @user.nil?
-    end
-
+    @user = User.where(fb_profile_id: profile_data[:id]).first
+    @user = User.create if @user.nil?
     @user.update_attributes({
       fb_profile_id: profile_data[:id],
       first_name: profile_data[:first_name],
       full_name: profile_data[:name],
       picture_url: profile_data[:picture][:data][:url]
     })
+    @user.update_attributes(fb_messenger_id: @messenger_id) unless @user.fb_messenger_id.present?
 
     profile_data[:friends][:data].each do |friend_data|
       friend = User.where(fb_profile_id: friend_data[:id]).first
