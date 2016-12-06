@@ -14,16 +14,15 @@ class InvitesController < ApplicationController
     load_invite_user('/invites/respond')
     @existing_response = InvitationResponse.where({user: @current_user, invitation: @invite}).first
     render 'respond', layout: 'webview_no_menu'
-    unless @existing_response.present?
+    if !@existing_response.present? && @current_user.id != @invite.user.id
       InvitationResponse.create({user: @current_user, invitation: @invite, response: 'seen'})
     end
   end
 
   def accept
     @invite = Invitation.find(params[:id])
-    response = @invite.invitation_responses.where(user: @current_user).first
-    response.response = 'accepted'
-    response.save!
+    response = InvitationResponse.find_or_create_by({user: @current_user, invitation: @invite})
+    response.update_attributes({response: 'accepted'})
     Activity.create({user: @current_user,
                      text: "#{@current_user.first_name} is going to an event: #{@invite.what}!",
                      time: @invite.when, location: @invite.where})
@@ -31,8 +30,8 @@ class InvitesController < ApplicationController
 
   def decline
     @invite = Invitation.find(params[:id])
-    response = InvitationResponse.where(user: @current_user, invitation: @invite).first
-    response.response = 'declined'
+    response = InvitationResponse.find_or_create_by({user: @current_user, invitation: @invite})
+    response.update_attributes({response: 'declined'})
     response.save!
   end
 

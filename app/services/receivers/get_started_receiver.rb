@@ -45,7 +45,7 @@ class GetStartedReceiver < AbstractReceiver
     multi_message do
       sender = CardSender.new(@user)
       sender.add_card(title: "Invitation: #{invite.what}. #{invite.when} - #{invite.where}",
-                      subtitle: "#{invite.details}. Click on the image above to response.",
+                      subtitle: "#{invite.details}. Click on the image above to respond.",
                       image_url: 'thryve.png')
             .add_url_button(url: with_fb_login('/invites/respond', {invite_id: invite.id}),
                             webview_size: 'tall', as_default_action: true)
