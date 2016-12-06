@@ -17,6 +17,11 @@
 </style>
 
 <div id="Friends" class="ui segment">
+<% unless @friends.present? %>
+  <div style="text-align: center" class="ui grey message">
+    You have no friends using Let's Thryve. Invite some!
+  </div>
+<% end %>
 <% @friends.each do |friend| %>
   <div class="container">
     <img class="ui avatar image" src="<%= friend.picture_url %>">
