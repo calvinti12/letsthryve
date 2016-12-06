@@ -60,7 +60,7 @@ class AbstractSender
   def make_request(request)
     RestClient.post "https://graph.facebook.com/v2.6/me/messages?access_token=#{ENV['FB_PAGE_ACCESS_TOKEN']}",
                     request, content_type: :json
-  rescue e
+  rescue => e
     Rails.logger("\n\n=======================================RESTCLIENT")
     Rails.logger(e.response)
     Rails.logger("=============================+END")

@@ -41,7 +41,7 @@
     <div class="ui green message" style="text-align: center; <%== 'display: none' unless showa %>">Invitation Accepted!</div>
     <div class="ui lightgrey message" style="text-align: center; <%== 'display: none' unless showd %>">Invitation Declined. Maybe next time!</div>
 
-    <% if @invite.user.id != !@existing_response || !(['accepted', 'declined'].include?(@existing_response.response))  %>
+    <% if @invite.user.id != @current_user.id && !@existing_response || !(['accepted', 'declined'].include?(@existing_response.response))  %>
       <div class="responseButtons" style="margin-top: .75rem">
         <a class="ui positive button" onclick="inviteAccept();">Accept</a>
         <a class="ui lightgrey button" onclick="inviteDeclined();">Decline</a>
