@@ -50,7 +50,7 @@ class InvitesController < ApplicationController
                        time: params[:when], location: params[:where]})
       receiver = GetStartedReceiver.new(@current_user)
       receiver.send_invite_card(invite)
-      render 'login_success', layout: 'bare'
+      render 'users/login_success', layout: 'bare'
     end
   end
 
