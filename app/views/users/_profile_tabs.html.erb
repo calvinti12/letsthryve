@@ -32,8 +32,8 @@
 <div id="ProfileMenu" class="ui blue secondary pointing menu">
   <%= link_to 'Activity', user_activity_path(user), class: "item #{'active' if current_page?(user_activity_path(user))}" %>
   <%= link_to 'Goals', user_goals_path(user), class: "item #{'active' if current_page?(user_goals_path(user))}" %>
-  <%= link_to 'Interests', user_interests_path(user), class: "item #{'active' if current_page?(user_interests_path(user))}" %>
-  <%= link_to 'Availability', user_availability_path(user), class: "item #{'active' if current_page?(user_availability_path(user))}" %>
+  <%= link_to 'Interests', user_interests_path(user), class: "item #{'active' if current_page?(user_interests_path(user)) || current_page?(edit_interests_path)}" %>
+  <%= link_to 'Availability', user_availability_path(user), class: "item #{'active' if current_page?(user_availability_path(user)) || current_page?(edit_availability_path)}" %>
 </div>
 <% if flash[:notice] %>
   <div class="ui message green" style="text-align: center">
