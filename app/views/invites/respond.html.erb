@@ -34,13 +34,19 @@
     <div class="ui sub header location"><i class="marker icon"></i> <%= @invite.where %></div>
     <p><i class="info icon"></i> <%= @invite.details %></p>
 
-    <%= render 'invites/response_list', locals: {guestlist: @invite.invitation_responses.alphabetical} %>
-    <div class="ui green message" style="text-align: center; display: none">Invitation Accepted!</div>
-    <div class="ui lightgrey message" style="text-align: center; display: none">Invitation Declined. Maybe next time!</div>
-    <div class="responseButtons" style="margin-top: .75rem">
-      <a class="ui positive button" onclick="inviteAccept();">Accept</a>
-      <a class="ui lightgrey button" onclick="inviteDeclined();">Decline</a>
-    </div>
+    <%= render 'invites/response_list', responses: @invite.invitation_responses.alphabetical %>
+
+    <% showa = (@existing_response.present? && @existing_response.response == 'accepted') %>
+    <% showd = (@existing_response.present? && @existing_response.response == 'declined') %>
+    <div class="ui green message" style="text-align: center; <%== 'display: none' unless showa %>">Invitation Accepted!</div>
+    <div class="ui lightgrey message" style="text-align: center; <%== 'display: none' unless showd %>">Invitation Declined. Maybe next time!</div>
+
+    <% if !@existing_response || !(['accepted', 'declined'].include?(@existing_response.response))  %>
+      <div class="responseButtons" style="margin-top: .75rem">
+        <a class="ui positive button" onclick="inviteAccept();">Accept</a>
+        <a class="ui lightgrey button" onclick="inviteDeclined();">Decline</a>
+      </div>
+    <% end %>
   </div>
 </div>
 
@@ -67,7 +73,7 @@
 </div>
 
 <script>
-  var thryveProfileImage = '/assets/israel.png';
+  var thryveProfileImage = '<%= @current_user.picture_url %>';
 
   window.fbAsyncInit = function() {
     FB.init({

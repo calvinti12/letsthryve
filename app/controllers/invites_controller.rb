@@ -12,9 +12,9 @@ class InvitesController < ApplicationController
 
   def respond
     load_invite_user('/invites/respond')
+    @existing_response = InvitationResponse.where({user: @current_user, invitation: @invite}).first
     render 'respond', layout: 'webview_no_menu'
-    @already_responded = InvitationResponse.where({user: @current_user, invitation: @invite}).any?
-    unless @already_responded
+    unless @existing_response.present?
       InvitationResponse.create({user: @current_user, invitation: @invite, response: 'seen'})
     end
   end
@@ -42,13 +42,15 @@ class InvitesController < ApplicationController
       flash[:error] = 'Please fill out all the fields'
       render 'new'
     else
-      Invitation.create({user: @current_user, what: params[:what],
+      invite = Invitation.create({user: @current_user, what: params[:what],
                          details: params[:details], where: params[:where],
                          when: params[:when]})
       Activity.create({user: @current_user,
                        text: "#{@current_user.first_name} made a new event: #{params[:what]}!",
                        time: params[:when], location: params[:where]})
-      redirect_to user_friends_url
+      receiver = GetStartedReceiver.new(@current_user)
+      receiver.send_invite_card(invite)
+      render 'login_success', layout: 'bare'
     end
   end
 

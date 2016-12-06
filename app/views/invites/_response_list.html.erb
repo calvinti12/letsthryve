@@ -5,13 +5,13 @@
   </div>
   <div class="content">
     <div id="InviteResponsesList" class="ui list">
-      <% guestlist.each do |guest| %>
+      <% responses.each do |response| %>
         <div class="item">
-          <img src="<%= guest.picture_url %>" class="ui avatar image" />
-          <span><%= guest.full_name %></span>
-          <% if guest.response == 'declined' %>
+          <img src="<%= response.user.picture_url %>" class="ui avatar image" />
+          <span><%= response.user.full_name %></span>
+          <% if response.response == 'declined' %>
             <div class="ui lightgrey horizontal label">Declined</div>
-          <% elsif guest.response == 'accepted' %>
+          <% elsif response.response == 'accepted' %>
             <div class="ui green horizontal label">Accepted</div>
           <% else %>
             <div class="ui basic horizontal label">Seen</div>

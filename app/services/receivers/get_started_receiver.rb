@@ -38,12 +38,16 @@ class GetStartedReceiver < AbstractReceiver
                         webview_size: 'full',
                         use_extensions: true)
         .deliver!
+    end
+  end
 
+  def send_invite_card(invite)
+    multi_message do
       sender = CardSender.new(@user)
-      sender.add_card(title: 'Invitation: Running. Dec 12 @ 9pm - Schenely Park',
-                      subtitle: 'This is the details of the event, it is important to read the details',
+      sender.add_card(title: "Invitation: #{invite.what}. #{invite.when} - #{invite.where}",
+                      subtitle: "#{invite.details}. Click on the image above to response.",
                       image_url: 'thryve.png')
-            .add_url_button(url: with_fb_login('/invites/respond', {invite_id: 1}),
+            .add_url_button(url: with_fb_login('/invites/respond', {invite_id: invite.id}),
                             webview_size: 'tall', as_default_action: true)
             .add_share_button
       sender.deliver!
