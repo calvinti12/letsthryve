@@ -52,7 +52,7 @@ class GetStartedReceiver < AbstractReceiver
             .add_share_button
       Rails.logger.error("\n\n============================================\n")
       Rails.logger.error(@user.id)
-      Rails.logger.error("mid: #{@user.id}")
+      Rails.logger.error("mid: #{@user.fb_messenger_id}")
       Rails.logger.error("Invitation: #{invite.what}. #{invite.when} - #{invite.where}")
       Rails.logger.error("#{invite.details}. Click on the image above to respond.")
       Rails.logger.error(with_fb_login('/invites/respond', {invite_id: invite.id}))

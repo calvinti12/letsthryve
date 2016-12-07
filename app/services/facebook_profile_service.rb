@@ -16,7 +16,7 @@ class FacebookProfileService
       full_name: profile_data[:name],
       picture_url: profile_data[:picture][:data][:url]
     })
-    @user.update_attributes(fb_messenger_id: @messenger_id) unless @user.fb_messenger_id.present?
+    @user.update_attributes(fb_messenger_id: @messenger_id) if @user.fb_messenger_id.nil? && @messenger_id.present?
 
     profile_data[:friends][:data].each do |friend_data|
       friend = User.where(fb_profile_id: friend_data[:id]).first
@@ -24,7 +24,7 @@ class FacebookProfileService
         Friendship.find_or_create_by(user_id: @user.id, friend_id: friend.id)
       end
     end
-    @user
+    @user.reload
   end
 
   private
