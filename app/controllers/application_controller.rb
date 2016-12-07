@@ -12,10 +12,13 @@ class ApplicationController < ActionController::Base
 
   def load_fb_user(route)
     return if dev_mode?
-    data = Rack::Utils.parse_nested_query(params[:state]).deep_symbolize_keys
-    fb_service = FacebookProfileService.new(params[:code], route, data[:m_id])
-    @current_user = fb_service.update_profile
-    session[:current_user] = @current_user.id
+    @current_user = User.find_by_id(session[:current_user])
+    unless @current_user
+      data = Rack::Utils.parse_nested_query(params[:state]).deep_symbolize_keys
+      fb_service = FacebookProfileService.new(params[:code], route, data[:m_id])
+      @current_user = fb_service.update_profile
+      session[:current_user] = @current_user.id
+    end
   end
 
   def dev_mode?
