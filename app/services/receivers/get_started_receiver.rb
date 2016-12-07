@@ -48,6 +48,7 @@ class GetStartedReceiver < AbstractReceiver
                             webview_size: 'tall', as_default_action: true)
             .add_share_button
       sender.deliver!
+      MessageSender.new(@user).set_message(:share_tip).deliver!
     end
   end
 
