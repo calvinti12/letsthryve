@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :load_user, only: [:activity, :goals, :interests, :availability]
 
   def login_success
-    load_fb_user('/login_success')
+    load_fb_user('/login_success', true)
     receiver = GetStartedReceiver.new(@current_user)
     receiver.initial_preferences
     render 'login_success', layout: 'bare'
