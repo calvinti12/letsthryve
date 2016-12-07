@@ -100,7 +100,7 @@
         '<div class="ui green horizontal label">Accepted</div>' +
       '</div>';
 
-    $.post("/invites/1/accept");
+    $.post("<%= accept_invite_path(@invite) %>");
     $('#InviteResponsesList').prepend(thryveListItem);
     $('.green.message').show();
     $('.responseButtons').hide();
@@ -113,7 +113,7 @@
         '<div class="ui lightgrey horizontal label">Declined</div>' +
       '</div>';
 
-    $.post("/invites/1/decline");
+    $.post("<%= decline_invite_path(@invite) %>");
     $('#InviteResponsesList').prepend(thryveListItem);
     $('.lightgrey.message').show();
     $('.responseButtons').hide();
