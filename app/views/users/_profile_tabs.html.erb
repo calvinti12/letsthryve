@@ -1,0 +1,55 @@
+<style>
+  #UserProfileImage .smallPaddedColumn {
+    padding: 14px 7px 7px 7px;
+  }
+
+  #UserProfileImage .image {
+    width: 3rem;
+    margin: auto;
+  }
+
+  #UserProfileImage .text {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  #ProfileMenu .item {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+</style>
+
+<% user = @user || @current_user %>
+<div id="UserProfileImage" class="ui grid">
+  <div class="six wide column smallPaddedColumn">
+    <img src="<%= user.picture_url %>"
+         class="ui medium circular image" />
+  </div>
+  <div class="ten wide column" style="padding-top: 25px">
+    <span class="text"><%= user.full_name %></span>
+  </div>
+</div>
+<div id="ProfileMenu" class="ui blue secondary pointing menu">
+  <%= link_to 'Activity', user_activity_path(user), class: "item #{'active' if current_page?(user_activity_path(user))}" %>
+  <%= link_to 'Goals', user_goals_path(user), class: "item #{'active' if current_page?(user_goals_path(user))}" %>
+  <%= link_to 'Interests', user_interests_path(user), class: "item #{'active' if current_page?(user_interests_path(user)) || current_page?(edit_interests_path)}" %>
+  <%= link_to 'Availability', user_availability_path(user), class: "item #{'active' if current_page?(user_availability_path(user)) || current_page?(edit_availability_path)}" %>
+</div>
+<% if flash[:notice] %>
+  <div class="ui message green" style="text-align: center">
+    <i class="close icon"></i>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if flash[:error] %>
+  <div class="ui message red" style="text-align: center">
+    <i class="close icon"></i>
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<script>
+  $('.message .close').on('click', function() {
+    $(this).closest('.message').transition('fade');
+  });
+</script>

@@ -1,0 +1,36 @@
+<style>
+  #InviteMenu > .item {
+    min-width: 50%;
+  }
+
+  #InviteMenu > .item > span {
+    margin: auto;
+  }
+</style>
+
+<div id="InviteMenu" class="ui blue secondary pointing menu">
+  <a href="<%= new_invite_path %>" class="item <%= 'active' if current_page?(new_invite_path) %>">
+    <span>Create an Invite</span>
+  </a>
+  <a href="<%= upcoming_invites_path %>" class="item <%= 'active' if current_page?(upcoming_invites_path) %>">
+    <span>Your Invites</span>
+  </a>
+</div>
+<% if flash[:notice] %>
+  <div class="ui message green" style="text-align: center">
+    <i class="close icon"></i>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if flash[:error] %>
+  <div class="ui message red" style="text-align: center">
+    <i class="close icon"></i>
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<script>
+  $('.message .close').on('click', function() {
+    $(this).closest('.message').transition('fade');
+  });
+</script>

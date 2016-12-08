@@ -8,6 +8,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :picture_url
       t.boolean :ignore, default: false
       t.string :last_message_sent
+      t.string :interests
+      t.string :availability
       t.timestamps
     end
 

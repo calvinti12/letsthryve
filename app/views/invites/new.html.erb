@@ -1,0 +1,67 @@
+<%= render 'invites/invite_tabs' %>
+
+<style>
+  #NewInvite > .inviteField {
+    margin-bottom: .75rem;
+  }
+
+  #NewInvite > .inviteField input {
+    width: 17.6rem;
+  }
+
+  #NewInvite > .inviteField > .label {
+    width: 5rem;
+  }
+
+  #NewInvite > .inviteField > .dropdown {
+    width: 17.5rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  #NewInvite > .inviteSubmit {
+    width: 100%;
+  }
+
+</style>
+<form id="NewInvite" class="ui form" action="/invites/create" method="post">
+  <!-- What -->
+  <div class="ui labeled input inviteField" style="margin-bottom:14px;">
+    <div class="ui label">What</div>
+    <div class="ui search">
+      <div class="ui icon input">
+        <input name="what" class="prompt" type="text" placeholder="Select an activity, e.g. Tennis">
+        <i class="search icon"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Details -->
+  <div class="ui labeled input inviteField">
+    <div class="ui label">Details</div>
+    <input name="details" type="text" placeholder="e.g. Let's burn some calories!">
+  </div>
+
+  <!-- Where -->
+  <div class="ui labeled input inviteField">
+    <div class="ui label">Where</div>
+    <input name="where" type="text" placeholder="e.g. 5000 Forbes Ave.">
+  </div>
+
+  <!-- When -->
+  <div class="ui labeled input inviteField">
+    <div class="ui label">When</div>
+    <input name="when" type="text" placeholder="e.g. Friday at 8pm, anytime, etc">
+  </div>
+
+  <!-- Submit -->
+  <button type="submit" class="ui fluid positive inviteSubmit button">Create</button>
+</form>
+
+<script>
+  $('select.dropdown').dropdown();
+  $('.ui.search')
+    .search({
+      source: <%== FormFieldData::ACTIVITIES.map{ |activity| {title: activity} }.to_json %>
+    });
+</script>

@@ -1,0 +1,121 @@
+<style>
+  #RespondInvite .responseButtons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #RespondInvite .responseButtons > a {
+    width: 47%;
+  }
+
+  #RespondInvite > .content > .mainHeader {
+    font-size: 1.1rem;
+  }
+
+  #RespondInvite > .content > .location {
+    margin-top: .15rem;
+  }
+
+  #RespondInvite > .content .icon {
+    margin-right: 1px;
+    margin-bottom: .25rem;
+  }
+</style>
+
+<div id="RespondInvite"  class="ui fluid card">
+  <div class="content">
+    <div class="header mainHeader">
+      <%= @invite.what %>
+      <span style="float: right"><%= @invite.when %></span>
+    </div>
+  </div>
+  <div class="content">
+    <div class="ui sub header"><i class="user icon"></i> <%= @invite.user.full_name %></div>
+    <div class="ui sub header location"><i class="marker icon"></i> <%= @invite.where %></div>
+    <p><i class="info icon"></i> <%= @invite.details %></p>
+
+    <%= render 'invites/response_list', responses: @invite.invitation_responses.alphabetical %>
+
+    <% showa = (@existing_response.present? && @existing_response.response == 'accepted') %>
+    <% showd = (@existing_response.present? && @existing_response.response == 'declined') %>
+    <div class="ui green message" style="text-align: center; <%== 'display: none' unless showa %>">Invitation Accepted!</div>
+    <div class="ui lightgrey message" style="text-align: center; <%== 'display: none' unless showd %>">Invitation Declined. Maybe next time!</div>
+
+    <% if @invite.user.id != @current_user.id && (@existing_response.nil? || !(['accepted', 'declined'].include?(@existing_response.response)))  %>
+      <div class="responseButtons" style="margin-top: .75rem">
+        <a class="ui positive button" onclick="inviteAccept();">Accept</a>
+        <a class="ui lightgrey button" onclick="inviteDeclined();">Decline</a>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- if no fb_messenger_id -->
+<div id="LearnAboutUs" class="ui accordion">
+  <div class="title">
+   <i class="dropdown icon"></i> What's Let's Thryve?
+  </div>
+
+  <div class="content">
+    <p style="color: grey;">
+      Let's Thryve is a Messenger bot that helps you find friends to exercise and hangout with.
+      Click 'Send to Messenger' below to start using the bot!
+    </p>
+    <div class="ui right aligned container fb-send-to-messenger"
+      style="margin-right: 0 !important;"
+      messenger_app_id="<%= ENV['FB_APP_ID'] %>"
+      page_id="<%= ENV['FB_PAGE_ID'] %>"
+      data-ref="MessagedUs"
+      color="white"
+      size="large">
+    </div>
+  </div>
+</div>
+
+<script>
+  var thryveProfileImage = '<%= @current_user.picture_url %>';
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: "<%= ENV['FB_APP_ID'] %>",
+      xfbml: true,
+      version: "v2.6"
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) { return; }
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  $('#LearnAboutUs').accordion();
+
+  function inviteAccept(){
+    var thryveListItem = '<div class="item">' +
+        '<img src="' + thryveProfileImage + '" class="ui avatar image" />' +
+        '<span>You</span>' +
+        '<div class="ui green horizontal label">Accepted</div>' +
+      '</div>';
+
+    $.post("<%= accept_invite_path(@invite) %>");
+    $('#InviteResponsesList').prepend(thryveListItem);
+    $('.green.message').show();
+    $('.responseButtons').hide();
+  }
+
+  function inviteDeclined(){
+    var thryveListItem = '<div class="item">' +
+        '<img src="' + thryveProfileImage + '" class="ui avatar image" />' +
+        '<span>You</span>' +
+        '<div class="ui lightgrey horizontal label">Declined</div>' +
+      '</div>';
+
+    $.post("<%= decline_invite_path(@invite) %>");
+    $('#InviteResponsesList').prepend(thryveListItem);
+    $('.lightgrey.message').show();
+    $('.responseButtons').hide();
+  }
+</script>

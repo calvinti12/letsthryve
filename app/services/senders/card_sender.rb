@@ -14,8 +14,6 @@ class CardSender < AbstractSender
   end
 
   def add_card(title: nil, subtitle: nil, item_url: nil, image_url: nil)
-    raise StandardError('CardSender title not set') unless title
-
     element = {}
     element[:title] = AbstractSender.locale_message(title)
     element[:subtitle] = AbstractSender.locale_message(subtitle) if subtitle
@@ -24,20 +22,25 @@ class CardSender < AbstractSender
     @elements.append(element)
 
     def element.add_url_button(title: nil, url: nil, webview_size: nil,
-                               use_extensions: false, fallback_url: nil)
-      raise StandardError('CardSender url button for element missing title or url') unless title && url
+                               use_extensions: false, fallback_url: nil,
+                               as_default_action: false)
+      raise StandardError('CardSender url button for element missing url') unless url
       raise StandardError("CardSender invalid value #{webview_size} for webview_size") unless [nil, 'compact', 'tall', 'full'].include?(webview_size)
 
-      self[:buttons] = [] unless self[:buttons]
+      self[:buttons] = [] unless (self[:buttons] || as_default_action)
       button = {
         type: 'web_url',
-        title: AbstractSender.locale_message(title),
         url: AbstractSender.url_for_page(url)
       }
+      button[:title] = AbstractSender.locale_message(title) unless as_default_action
       button[:webview_height_ratio] = webview_size if webview_size
       button[:messenger_extensions] = use_extensions if use_extensions
       button[:fallback_url] = AbstractSender.url_for_page(fallback_url) if fallback_url
-      self[:buttons].append(button)
+      if as_default_action
+        self[:default_action] = button
+      else
+        self[:buttons].append(button)
+      end
       self
     end
 

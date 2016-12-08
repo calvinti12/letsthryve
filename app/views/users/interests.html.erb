@@ -1,0 +1,102 @@
+<%= render 'users/profile_tabs' %>
+
+<style type="text/css">
+  #InterestList {
+    width: 90%;
+    margin: auto;
+  }
+
+  #InterestList > p {
+    margin-top: .75rem;
+  }
+
+  #webview-content .activity {
+    margin-bottom: .25rem;
+  }
+
+  #webview-content .labelText {
+    width: 6.5rem;
+    font-size: .9rem;
+  }
+
+  #interestCards .column {
+    margin-bottom: 0.25rem;
+  }
+</style>
+
+<% unless @edit_mode %>
+<div id="InterestList" class="ui raised segment">
+  <a class="ui red ribbon label">Exercising</a>
+  <p>
+    <% @interests[:exercises].each do |interest| %>
+      <span class="ui label"><%= interest %></span>
+    <% end %>
+  </p>
+  <a class="ui teal left ribbon label">Hanging Out</a>
+  <p>
+    <% @interests[:hangouts].each do |interest| %>
+      <span class="ui label"><%= interest %></span>
+    <% end %>
+  </p>
+  <a class="ui blue left ribbon label">Campus Events</a>
+  <p>
+    <% @interests[:oncampus].each do |interest| %>
+      <span class="ui label"><%= interest %></span>
+    <% end %>
+  </p>
+
+  <% if @user == @current_user %>
+    <%= link_to 'Edit', edit_interests_path, class: 'ui lightgrey fluid button' %>
+  <% end %>
+</div>
+<% else %>
+<div id="webview-content">
+  <div class="infoContainer">
+    <p style="font-size: 1.1rem">What are your favorite things to do together?</p>
+  </div>
+  <form class="ui form" action="/set_interests" method="post">
+    <div class="ui labeled input activity">
+      <div class="ui label labelText">Exercise</div>
+      <select multiple class="ui dropdown flushBorder" name="exercises[]">
+        <option value=''>Select all that apply</option>
+        <% FormFieldData::EXERCISE.each do |activity| %>
+          <option value="<%= activity %>"><%= activity %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="ui labeled input activity">
+      <div class="ui label labelText">Hang Out</div>
+      <select multiple class="ui dropdown flushBorder" name="hangouts[]">
+        <option value=''>Select all that apply</option>
+        <% FormFieldData::HANGOUT.each do |activity| %>
+          <option value="<%= activity %>"><%= activity %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="ui labeled input activity">
+      <div class="ui label labelText">On Campus</div>
+      <select multiple class="ui dropdown flushBorder" name="oncampus[]">
+        <option value=''>Select all that apply</option>
+        <% FormFieldData::ONCAMPUS.each do |activity| %>
+          <option value="<%= activity %>"><%= activity %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="submitButton">
+      <p style="color: grey">
+        <i class="grey info circle icon"></i>
+        Your friends can invite you to any activity, but, this lets them
+        know what you <strong>really</strong> love to do!
+      </p>
+      <input type="submit" value="Done" class="ui positive fluid button" />
+    </div>
+  </form>
+</div>
+
+
+<script type="text/javascript">
+  $('select.dropdown').dropdown();
+  $('.selection.dropdown').attr('style', 'width: 16rem');
+</script>
+<% end %>

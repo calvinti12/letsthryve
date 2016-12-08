@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   has_many :friendships
   has_many :friends, through: :friendships, source: :friend
+  has_many :activities
+  has_many :goals
+  has_many :invitations
+  has_many :invitation_responses
 end
 
 # == Schema Information
@@ -15,6 +19,8 @@ end
 #  picture_url       :string
 #  ignore            :boolean          default(FALSE)
 #  last_message_sent :string
+#  interests         :string
+#  availability      :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

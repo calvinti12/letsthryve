@@ -1,0 +1,54 @@
+#InviteResponses > .content > .ui.list > .item {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+
+#InviteResponses > .content > .ui.list > .item > span{
+  text-align: center;
+  flex-grow: 1;
+}
+
+#InviteResponses > .content > .ui.list > .item > div{
+  min-width: 28%;
+}
+
+#webview-content {
+  margin-top: .5rem;
+  margin-bottom: 5rem;
+}
+
+#webview-content .mainContainer {
+  margin: auto;
+  text-align: center;
+  width: 22.5rem;
+}
+
+#webview-content .infoContainer {
+  margin: auto;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#webview-content .infoImage {
+  margin-bottom: .25rem;
+  width: 10rem;
+}
+
+#webview-content .timeSelectContainer {
+  display: flex;
+  justify-content: center;
+}
+
+#webview-content .submitButton {
+  margin: auto;
+  margin-top: 2em;
+  width: 22.5rem;
+  text-align: center;
+}
+
+#webview-content .flushBorder {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}

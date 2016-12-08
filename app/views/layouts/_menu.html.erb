@@ -1,0 +1,12 @@
+<style>
+  #MainMenu .item {
+    flex-grow: 1;
+  }
+</style>
+
+<div id="MainMenu" class="ui pointing menu">
+  <%= link_to 'Newsfeed', user_newsfeed_path, class: "item #{'active' if current_page?(user_newsfeed_path)}" %>
+  <%= link_to 'Myself', user_activity_path(@current_user), class: "item #{'active' if current_page?(user_activity_path(@current_user)) || current_page?(user_goals_path(@current_user)) || current_page?(user_interests_path(@current_user)) || current_page?(user_availability_path(@current_user)) || current_page?(edit_availability_path) || current_page?(edit_interests_path)}" %>
+  <%= link_to 'Friends', user_friends_path, class: "item #{'active' if current_page?(user_friends_path) || (@user.present? && @user != @current_user)}" %>
+  <%= link_to 'Invite', new_invite_path, class: "item #{'active' if current_page?(new_invite_path) || current_page?(upcoming_invites_path)}" %>
+</div>
