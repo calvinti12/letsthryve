@@ -1,24 +1,8 @@
-# README
+# Let's Thryve
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Let's Thryve is a Facebook Messenger bot that can help people find friends that want to exercise or hangout together. It also helps users broadcast their personal wellness goals so that they can work towards them together with their friends. Below are some screenshots.
 
-Things you may want to cover:
+Let's Thryve is hosted on DigitalOcean and you can find the Facebook Page at [https://facebook.com/letsthryve](https://facebook.com/letsthryve). Just chat with the bot to get started (note: you have to be a developer to chat with the bot since it hasn't been released yet).
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+More screenshots in the future.
+![letsthryve](https://github.com/purelogiq/letsthryve/raw/master/app/assets/images/thryve.png)
