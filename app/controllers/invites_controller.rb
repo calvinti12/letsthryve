@@ -47,8 +47,10 @@ class InvitesController < ApplicationController
       Activity.create({user: @current_user,
                        text: "#{@current_user.first_name} made a new event: #{params[:what]}!",
                        time: params[:when], location: params[:where]})
-      receiver = GetStartedReceiver.new(@current_user)
-      receiver.send_invite_card(invite)
+      unless session[:force_mode]
+        receiver = GetStartedReceiver.new(@current_user)
+        receiver.send_invite_card(invite)
+      end
       render 'users/login_success', layout: 'bare'
     end
   end
@@ -56,6 +58,11 @@ class InvitesController < ApplicationController
   private
 
   def load_invite_user(route)
+    if session[:force_mode]
+      @current_user = User.find(session[:current_user])
+      @invite = Invitation.find(params[:id])
+      return
+    end
     return if dev_mode?
     data = Rack::Utils.parse_nested_query(params[:state]).deep_symbolize_keys
     @invite = Invitation.find(data[:invite_id])
