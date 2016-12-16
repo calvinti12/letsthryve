@@ -9,6 +9,7 @@ class FacebookProfileService
     profile_data = get_profile
 
     @user = User.where(fb_profile_id: profile_data[:id]).first
+    @user = User.where(fb_messenger_id: @messenger_id).where('first_name IS NOT NULL').first if @user.nil?
     @user = User.create if @user.nil?
     @user.update_attributes({
       fb_profile_id: profile_data[:id],
