@@ -15,8 +15,8 @@
     <div class="entry">
       <img class="ui avatar image" src="<%= activity.picture_url_override || activity.user.picture_url %>" style="margin-top: 5px">
       <p>
-        <%= activity.text %><br />
-        <span style="color: grey"><%= activity.time %>. <%= activity.location %></span>
+        <%== activity.text %><br />
+        <span style="color: grey"><%== activity.time %>. <%== activity.location %></span>
       </p>
     </div>
   <% end %>

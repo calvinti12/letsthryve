@@ -55,7 +55,7 @@
   <% @goals.each do |goal| %>
     <div class="ui segment goal">
       <a class="ui ribbon label">Goal started <%= goal.created_at.strftime('%b %e, %Y') %></a>
-      <div class="description"><%= goal.text %></div>
+      <div class="description"><%== goal.text %></div>
 
       <% unless goal.goal_encouragements.count == 0 %>
         <div class="ui styled fluid accordion">
@@ -67,7 +67,7 @@
             <% goal.goal_encouragements.each do |e| %>
               <p>
                 <img class="ui avatar image" src="<%= e.user.picture_url %>" />
-                <span><%= e.text %></span>
+                <span><%== e.text %></span>
               </p>
             <% end %>
           </div>
