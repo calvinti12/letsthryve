@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
   layout 'webview'
-  before_action :load_current_user, except: [:login_success, :newsfeed]
+  before_action :load_current_user, except: [:force_login, :login_success, :newsfeed]
   before_action :load_user, only: [:activity, :goals, :interests, :availability]
+
+  def force_login
+    session[:force_mode] = true
+    session[:current_user] = User.where(first_name: params[:name].capitalize).first.id
+    redirect_to user_newsfeed_url
+  end
 
   def login_success
     load_fb_user('/login_success', true)

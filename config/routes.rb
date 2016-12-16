@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'messages/webhook', to: 'messages#webhook'
   post 'messages/webhook', to: 'messages#incoming'
 
+  # Force login endpoint
+  get '/force_login/:name', to: 'users#force_login'
+
   # Facebook oauth endpoint
   get '/login_success', to: 'users#login_success'
 
