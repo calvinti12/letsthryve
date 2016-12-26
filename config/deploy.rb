@@ -10,16 +10,19 @@ def abort_deploy
   exit
 end
 
-ask :confirmation, "\n > You are about to deploy to letsthryve.com. Are you sure you want to do that? (yes/no)"
-abort_deploy unless fetch(:confirmation) == 'yes'
-ask :confirmation, "\n > Have you posted in the 67-475GoGo! Slack builds channel that you are deploying? (yes/no)"
-abort_deploy unless fetch(:confirmation) == 'yes'
-ask :confirmation, "\n > Are you sure you want to deploy the **#{`git rev-parse --abbrev-ref HEAD`.chomp}** branch that you are currently on? (yes/no)"
-abort_deploy unless fetch(:confirmation) == 'yes'
-ask :confirmation, "\n > The deploy pulls directly from GitHub, not your machine. Have you pushed all your changes to GitHub? (yes/no)"
-abort_deploy unless fetch(:confirmation) == 'yes'
-ask :confirmation, "\n > Are you ready to do this?!!??!! (yes or yes)"
-abort_deploy unless fetch(:confirmation) == 'yes'
+unless ENV['SKIPALL']
+  ask :confirmation, "\n > You are about to deploy to letsthryve.com. Are you sure you want to do that? (yes/no)"
+  abort_deploy unless fetch(:confirmation) == 'yes'
+  ask :confirmation, "\n > Have you posted in the 67-475GoGo! Slack builds channel that you are deploying? (yes/no)"
+  abort_deploy unless fetch(:confirmation) == 'yes'
+  ask :confirmation, "\n > Are you sure you want to deploy the **#{`git rev-parse --abbrev-ref HEAD`.chomp}** branch that you are currently on? (yes/no)"
+  abort_deploy unless fetch(:confirmation) == 'yes'
+  ask :confirmation, "\n > The deploy pulls directly from GitHub, not your machine. Have you pushed all your changes to GitHub? (yes/no)"
+  abort_deploy unless fetch(:confirmation) == 'yes'
+  ask :confirmation, "\n > Are you ready to do this?!!??!! (yes or yes)"
+  abort_deploy unless fetch(:confirmation) == 'yes'
+end
+
 set :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
