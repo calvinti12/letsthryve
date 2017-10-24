@@ -30,6 +30,6 @@ group :development do
   gem 'capistrano3-nginx'
   gem 'capistrano-upload-config'
   gem 'annotate'
-end
 gem 'rails_12factor', group: :production
 ruby "2.3.4"
+end
